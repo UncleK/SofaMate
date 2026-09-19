@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "1.0",
+  "planVersion": "1.0.0",
+  "packId": "second-scene-fixture",
+  "label": "不同人物/空间的结构测试：雨窗书桌",
+  "entryNode": "desk_read",
+  "canvas": {
+    "width": 1280,
+    "height": 720,
+    "fpsNumerator": 30,
+    "fpsDenominator": 1
+  },
+  "display": {
+    "mode": "overlay-stage",
+    "previewMode": "scene-preview",
+    "fit": "contain",
+    "primaryDisplayOnly": true
+  },
+  "generation": {
+    "videoProvider": "synthetic test only",
+    "maxRequestSeconds": 30,
+    "imageProvider": "synthetic test only"
+  },
+  "roles": {
+    "identityAssetId": "TEST_ACTOR",
+    "stageAssetId": "TEST_STAGE"
+  },
+  "nodes": [
+    {
+      "id": "desk_read",
+      "label": "书桌阅读",
+      "anchorId": "H_DESK",
+      "designAssetId": "DESIGN_DESK",
+      "snapshot": {
+        "place": "desk",
+        "book": "hands",
+        "mouth": "still"
+      }
+    },
+    {
+      "id": "window_pause",
+      "label": "窗边看雨",
+      "anchorId": "H_WINDOW",
+      "designAssetId": "DESIGN_WINDOW",
+      "snapshot": {
+        "place": "window",
+        "book": "desk",
+        "mouth": "still"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "quiet_read",
+      "fromNode": "desk_read",
+      "toNode": "desk_read",
+      "label": "安静阅读",
+      "plannedSeconds": 18,
+      "prompt": "prompts/video/quiet_read.md",
+      "tag": "test",
+      "weight": 1,
+      "cooldownSec": 0,
+      "status": "planned",
+      "media": null,
+      "sourceAnchorId": "H_DESK",
+      "targetAnchorId": "H_DESK"
+    },
+    {
+      "id": "look_out",
+      "fromNode": "desk_read",
+      "toNode": "window_pause",
+      "label": "放书走到窗边",
+      "plannedSeconds": 24,
+      "prompt": "prompts/video/look_out.md",
+      "tag": "test",
+      "weight": 1,
+      "cooldownSec": 0,
+      "status": "planned",
+      "media": null,
+      "sourceAnchorId": "H_DESK",
+      "targetAnchorId": "H_WINDOW"
+    },
+    {
+      "id": "return_desk",
+      "fromNode": "window_pause",
+      "toNode": "desk_read",
+      "label": "返回书桌拿起书",
+      "plannedSeconds": 24,
+      "prompt": "prompts/video/return_desk.md",
+      "tag": "test",
+      "weight": 1,
+      "cooldownSec": 0,
+      "status": "planned",
+      "media": null,
+      "sourceAnchorId": "H_WINDOW",
+      "targetAnchorId": "H_DESK"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0",
+  "anchors": [
+    {
+      "id": "H_DESK",
+      "nodeId": "desk_read",
+      "version": 1,
+      "status": "planned",
+      "imagePath": null,
+      "imageSha256": null,
+      "sourceVideoPath": null,
+      "sourceVideoSha256": null,
+      "sourceFrameIndex": null,
+      "sourcePts": null,
+      "motionHandlePath": null,
+      "motionHandleSha256": null
+    },
+    {
+      "id": "H_WINDOW",
+      "nodeId": "window_pause",
+      "version": 1,
+      "status": "planned",
+      "imagePath": null,
+      "imageSha256": null,
+      "sourceVideoPath": null,
+      "sourceVideoSha256": null,
+      "sourceFrameIndex": null,
+      "sourcePts": null,
+      "motionHandlePath": null,
+      "motionHandleSha256": null
+    }
+  ]
+}

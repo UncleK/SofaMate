@@ -1,0 +1,28 @@
+[Unit]
+Description=SofaMate community API
+After=network.target
+
+[Service]
+Type=simple
+User=sofamate
+Group=sofamate
+WorkingDirectory=/srv/sofamate/current
+EnvironmentFile=/etc/sofamate/server.env
+ExecStart=/srv/sofamate/runtime/bin/node /srv/sofamate/current/market.mjs
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/sofamate/data
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+CPUQuota=75%
+MemoryHigh=384M
+MemoryMax=512M
+TasksMax=64
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,2290 @@
+{
+  "manifest": {
+    "schemaVersion": "1.0",
+    "packId": "living-room-night-720p24",
+    "packVersion": "0.2.0",
+    "minRuntimeVersion": "0.1.0",
+    "label": "夜间客厅 · 生活篇",
+    "entryNode": "P0",
+    "entryPoster": {
+      "path": "media/posters/P0.png",
+      "sha256": "60d770c83b1f9c47f6b440396473173087ce263530adcd5e5e10981447396328",
+      "bytes": 903518
+    },
+    "canvas": {
+      "width": 1280,
+      "height": 720,
+      "fpsNumerator": 24,
+      "fpsDenominator": 1
+    },
+    "displayMode": "scene-preview",
+    "fit": "contain",
+    "mediaProfile": "opaque-video",
+    "graph": {
+      "path": "graph.json",
+      "sha256": "444463e902b0b61bc0196c515b9905273f58644930b0e4ba815af95a2ec2bbfb",
+      "bytes": 26382
+    },
+    "joins": {
+      "path": "joins.json",
+      "sha256": "9039ace238a611193b24c150c1fc9911a926dfc0fc2f06fc68f8d4d2a2b3339e",
+      "bytes": 43014
+    },
+    "provenance": {
+      "path": "provenance.json",
+      "sha256": "3e49c3e634004cc15a6fdf92101041138cc5a27b692642312349b97dd9f9e107",
+      "bytes": 28282
+    },
+    "ambientAudio": null,
+    "requiredCapabilities": [
+      "opaque-video",
+      "cut",
+      "random-start"
+    ],
+    "startPoints": [
+      {
+        "edgeId": "E00",
+        "poster": {
+          "path": "media/posters/start-E00.png",
+          "sha256": "60d770c83b1f9c47f6b440396473173087ce263530adcd5e5e10981447396328",
+          "bytes": 903518
+        },
+        "mediaHash": "5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f",
+        "trimFingerprint": "0:289:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E01",
+        "poster": {
+          "path": "media/posters/start-E01.png",
+          "sha256": "68e55a9c4658470367e074570cbd4c688a47ac68ed1a1e194b2a192b3343f8ce",
+          "bytes": 916936
+        },
+        "mediaHash": "3da11404db595dbec25cbfea140b59d85b930f2fc49661d8dab7a9b5a945a78e",
+        "trimFingerprint": "0:289:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E02",
+        "poster": {
+          "path": "media/posters/start-E02.png",
+          "sha256": "f2cfdcd5630d4bfb911a6d395aeaf6ff2a08eec771b7aea355f1ea6664cb27cb",
+          "bytes": 935130
+        },
+        "mediaHash": "96a24671651e7c6713f9a859a2085d3eac265214a6d5058f673eb17cbd562012",
+        "trimFingerprint": "0:289:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E05",
+        "poster": {
+          "path": "media/posters/start-E05.png",
+          "sha256": "f9465d18f2a9be695999fbd03d1529c83ebaa4ff9539e69b389ed1dee9638e4a",
+          "bytes": 921069
+        },
+        "mediaHash": "86739d8a705f3a34a9e033e8283d45c15f0dd9ce57670ef6f09ca10a82f980d7",
+        "trimFingerprint": "0:289:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E06",
+        "poster": {
+          "path": "media/posters/start-E06.png",
+          "sha256": "b6f46435dfb58b82e28f8a1e271f734c47cb3485da6aed915d4fb4658b1ed315",
+          "bytes": 904352
+        },
+        "mediaHash": "bc96381d591dc2910df40254f816c5300456d4b80f87ff05b2f54bfe17962d34",
+        "trimFingerprint": "0:240:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E08",
+        "poster": {
+          "path": "media/posters/start-E08.png",
+          "sha256": "3e6600801c2b1919356f6320673a4b9e77c31358ef013aa376146c1f5fe8aac0",
+          "bytes": 926411
+        },
+        "mediaHash": "2b73b21c7c92243b6770767e08402d359f7d1be5e202af0622c62461a1945f89",
+        "trimFingerprint": "0:289:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E09",
+        "poster": {
+          "path": "media/posters/start-E09.png",
+          "sha256": "303bb6b0c3862369d3ca8eff6cf71eeff220087fdfb099904b9f89192d1fb483",
+          "bytes": 914278
+        },
+        "mediaHash": "4385f534888f9bcebbe3e5ff5c2c05d03d51c945aace84e4bc2d60ab82938ffe",
+        "trimFingerprint": "0:361:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E10",
+        "poster": {
+          "path": "media/posters/start-E10.png",
+          "sha256": "8c67fb5882a3e9dc3acb19659cdd2eebacbe9de8c588fd4c381649346d8241dc",
+          "bytes": 934989
+        },
+        "mediaHash": "823987f2e0a7eafb966f65a0084e5c0201d5275b8c165933fa925f123e5076ac",
+        "trimFingerprint": "0:289:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E12",
+        "poster": {
+          "path": "media/posters/start-E12.png",
+          "sha256": "b05691c4ee76d3650918a364217d790dd774a390d4c3edac84e4424f65562d09",
+          "bytes": 954256
+        },
+        "mediaHash": "a6aee3b093d5d450ae72a2840c6ba44355e802cac331b8c27408e319e3569536",
+        "trimFingerprint": "0:360:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E13",
+        "poster": {
+          "path": "media/posters/start-E13.png",
+          "sha256": "c7f533030683e945cbea35338fc7a385cdb851bc2b12c8b49bed6a1497fad157",
+          "bytes": 929820
+        },
+        "mediaHash": "5e63502947b2e34e803f1d4ff853296d2bd3bea53b39723bd0fb1946082d0101",
+        "trimFingerprint": "0:361:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E14",
+        "poster": {
+          "path": "media/posters/start-E14.png",
+          "sha256": "be3ce93102184d28e8b9205d5e77d0d8ba54a21be2e3172b55bf4e1fd7ffacf6",
+          "bytes": 918063
+        },
+        "mediaHash": "a9b0e60bf0f36a71e1310f3b28960e916eac67b6d02cbf7177e57dad3b24b31d",
+        "trimFingerprint": "0:289:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E16",
+        "poster": {
+          "path": "media/posters/start-E16.png",
+          "sha256": "1d17d39ee3febf75ea1c317a3c0f21490412ea2a796dec1e3b6f5f9b2e6affff",
+          "bytes": 895602
+        },
+        "mediaHash": "9bac9b3026bbabb2bc91fb5451c9257b95f5c2ff4510350ffa1381f54bf8fddf",
+        "trimFingerprint": "0:361:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E17",
+        "poster": {
+          "path": "media/posters/start-E17.png",
+          "sha256": "c226dc4f262a264ac9f31b784325b861c0634024d90651863a697fa88250daaa",
+          "bytes": 958619
+        },
+        "mediaHash": "bca0dd7b1c3f75178beb707d5adf98b687de67ffcbf8f62bd1a64ce769b84f3f",
+        "trimFingerprint": "0:360:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E18",
+        "poster": {
+          "path": "media/posters/start-E18.png",
+          "sha256": "d8700f47122ac953b83fda24f4621b3c98f909e6883d338b77524b5c5c1747ae",
+          "bytes": 940272
+        },
+        "mediaHash": "70d5000c8ed6c4de2005b712b1ffbf3a714a7772e89d6e2c82de3b49e37262db",
+        "trimFingerprint": "0:361:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E19",
+        "poster": {
+          "path": "media/posters/start-E19.png",
+          "sha256": "ac9d5933a00510e9bfd79e876d3d64a7e9cc66bd52c9128e6bec9c1565efb314",
+          "bytes": 951052
+        },
+        "mediaHash": "d30d158583c655de6c9b914592b55beccfa94396ee55348dbfd03dc1c2028ef7",
+        "trimFingerprint": "0:289:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E20",
+        "poster": {
+          "path": "media/posters/start-E20.png",
+          "sha256": "fbd7233fb815a00323858cef1f1cdb13bbb5a269a61ab707916d8f0dada7d72d",
+          "bytes": 921077
+        },
+        "mediaHash": "cc2b4d12c8499719dd7d3a0e217e360a3e2098b97a386374d32761fcf3de5cf3",
+        "trimFingerprint": "0:361:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E21",
+        "poster": {
+          "path": "media/posters/start-E21.png",
+          "sha256": "3650142b0418d668e269101af5c895274abc498bb6997299ec47f804d5598708",
+          "bytes": 914677
+        },
+        "mediaHash": "a62233c91eb5e018a7ea86e382934568ef6b9932e7d753df716bb47d13d35fb7",
+        "trimFingerprint": "0:361:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E22",
+        "poster": {
+          "path": "media/posters/start-E22.png",
+          "sha256": "5ed354ce84a17794c5cb24dda3d80be71f56b82468dbb4c1c14587b62adb46d3",
+          "bytes": 909575
+        },
+        "mediaHash": "8e37e7f80cbbd052fd7c0af3e9bf4884e19a73e2bfc69635595b64c2150d9684",
+        "trimFingerprint": "0:361:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E23",
+        "poster": {
+          "path": "media/posters/start-E23.png",
+          "sha256": "977abfb8938dbae1b5b22579815570462908142eec845fa870aa27d883692348",
+          "bytes": 937854
+        },
+        "mediaHash": "6ce766c3eaf08b9a5900143f17ebc42161b7ef9375330d5c87758c4fa116a1a2",
+        "trimFingerprint": "0:361:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E24",
+        "poster": {
+          "path": "media/posters/start-E24.png",
+          "sha256": "0c520fb43b645a1de25bfac85a49524650191d717f63648349d4cc3d064c5d35",
+          "bytes": 939966
+        },
+        "mediaHash": "c0cb2259cf51ea315a4093c2bb591b57ddc72865dbac0125b9195bc6deb838a2",
+        "trimFingerprint": "0:361:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E25",
+        "poster": {
+          "path": "media/posters/start-E25.png",
+          "sha256": "9e5bf8551ffd4a452b29f8de2f23a1767f6b435da2dc02e6dde796fe67e0a3ad",
+          "bytes": 935262
+        },
+        "mediaHash": "fd0cb17e4e782a62ebae513b3ebb9d40c335278b2e4c91a6010b32734d765258",
+        "trimFingerprint": "0:361:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E26",
+        "poster": {
+          "path": "media/posters/start-E26.png",
+          "sha256": "f52ff0e7d60f7edf5ac01389b522ce44b8ad36d4143186b57da882ef369b0a1f",
+          "bytes": 920988
+        },
+        "mediaHash": "2ff6e2594338bae816c7ef42f41e0f8969953c5d907319a98e069fea2bb1dacf",
+        "trimFingerprint": "0:361:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E27",
+        "poster": {
+          "path": "media/posters/start-E27.png",
+          "sha256": "209be8c9efcfaf139a8fc123e993d6add8e3623002ac6b764cfb69765ebea7bb",
+          "bytes": 930527
+        },
+        "mediaHash": "1d241887e186457cf70ca8b907ab5fa60ec751ff14b2adc4fd37043da81a95fa",
+        "trimFingerprint": "0:288:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E28",
+        "poster": {
+          "path": "media/posters/start-E28.png",
+          "sha256": "f4804fb6aff43d5387b8202e6da278cc5060c2fc2c468c3ce96ca22cff99e848",
+          "bytes": 904688
+        },
+        "mediaHash": "6c810de51869100546eeeb564caaa11e6a71782757fef171fd5d15a7f6b50fe6",
+        "trimFingerprint": "0:361:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E29",
+        "poster": {
+          "path": "media/posters/start-E29.png",
+          "sha256": "b5b7e0e2a5654080dea7d1d07a99691426a2e9bb26bb27868997a8ec6b612a73",
+          "bytes": 918657
+        },
+        "mediaHash": "8b5e1ace7505d67f2e6734718f0c2ca9e7eef202cd39d7262d3a430f39bc924d",
+        "trimFingerprint": "0:289:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E30",
+        "poster": {
+          "path": "media/posters/start-E30.png",
+          "sha256": "3bbf53e966b90beeae56638a9a97e148b79d0e4904384dd6732e063a6a936e53",
+          "bytes": 931194
+        },
+        "mediaHash": "4c205d51e3e625bd3ffd6e294fbf2b8746f85e9c6fd3d1b422ad86654766ef80",
+        "trimFingerprint": "0:289:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E31",
+        "poster": {
+          "path": "media/posters/start-E31.png",
+          "sha256": "533a09dd13acdf095756261ac2f9fcf5415bb6797a7b26b041ae47ad7d21fd5f",
+          "bytes": 941785
+        },
+        "mediaHash": "6d84c2ffabbe31835c5a27ffa5c061ce0633b6bfc693650363c8a123d1b6c967",
+        "trimFingerprint": "0:240:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      },
+      {
+        "edgeId": "E32",
+        "poster": {
+          "path": "media/posters/start-E32.png",
+          "sha256": "4be347aa125e9df5c9d59ed7b4644b8ed46f4d9bcbf8d0ff0e4ed6374bf0a2b1",
+          "bytes": 893808
+        },
+        "mediaHash": "dc329071afcf523ed694bf017d81be25bf00e56b5c7fe762fb8ea6600d5f86d4",
+        "trimFingerprint": "0:361:24/1",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (random standalone startup + first demo approval)"
+      }
+    ]
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "P0",
+        "label": "安静坐着，平视前方",
+        "anchorVersion": "demo-cfr24-v1",
+        "anchorImageHash": "60d770c83b1f9c47f6b440396473173087ce263530adcd5e5e10981447396328",
+        "snapshot": {
+          "pose": "安静坐着，平视前方",
+          "anchorSource": "E00",
+          "anchorFrame": 0,
+          "scope": "first-demo-with-known-visual-differences"
+        }
+      },
+      {
+        "id": "P1",
+        "label": "蜷腿抱枕",
+        "anchorVersion": "demo-cfr24-v1",
+        "anchorImageHash": "f2cfdcd5630d4bfb911a6d395aeaf6ff2a08eec771b7aea355f1ea6664cb27cb",
+        "snapshot": {
+          "pose": "蜷腿抱枕",
+          "anchorSource": "E02",
+          "anchorFrame": 0,
+          "scope": "first-demo-with-known-visual-differences"
+        }
+      },
+      {
+        "id": "P3",
+        "label": "右手拿遥控器",
+        "anchorVersion": "demo-cfr24-v1",
+        "anchorImageHash": "b6f46435dfb58b82e28f8a1e271f734c47cb3485da6aed915d4fb4658b1ed315",
+        "snapshot": {
+          "pose": "右手拿遥控器",
+          "anchorSource": "E06",
+          "anchorFrame": 0,
+          "scope": "first-demo-with-known-visual-differences"
+        }
+      },
+      {
+        "id": "P4",
+        "label": "左手抱薯片袋，已咽下",
+        "anchorVersion": "demo-cfr24-v1",
+        "anchorImageHash": "8c67fb5882a3e9dc3acb19659cdd2eebacbe9de8c588fd4c381649346d8241dc",
+        "snapshot": {
+          "pose": "左手抱薯片袋，已咽下",
+          "anchorSource": "E10",
+          "anchorFrame": 0,
+          "scope": "first-demo-with-known-visual-differences"
+        }
+      },
+      {
+        "id": "P6",
+        "label": "侧躺清醒",
+        "anchorVersion": "demo-cfr24-v1",
+        "anchorImageHash": "3650142b0418d668e269101af5c895274abc498bb6997299ec47f804d5598708",
+        "snapshot": {
+          "pose": "侧躺清醒",
+          "anchorSource": "E21",
+          "anchorFrame": 0,
+          "scope": "first-demo-with-known-visual-differences"
+        }
+      },
+      {
+        "id": "P7",
+        "label": "侧躺睡着，盖毯",
+        "anchorVersion": "demo-cfr24-v1",
+        "anchorImageHash": "0c520fb43b645a1de25bfac85a49524650191d717f63648349d4cc3d064c5d35",
+        "snapshot": {
+          "pose": "侧躺睡着，盖毯",
+          "anchorSource": "E24",
+          "anchorFrame": 0,
+          "scope": "first-demo-with-known-visual-differences"
+        }
+      },
+      {
+        "id": "P8",
+        "label": "沙发旁站立",
+        "anchorVersion": "demo-cfr24-v1",
+        "anchorImageHash": "ac9d5933a00510e9bfd79e876d3d64a7e9cc66bd52c9128e6bec9c1565efb314",
+        "snapshot": {
+          "pose": "沙发旁站立",
+          "anchorSource": "E19",
+          "anchorFrame": 0,
+          "scope": "first-demo-with-known-visual-differences"
+        }
+      },
+      {
+        "id": "P5",
+        "label": "跪地擦完看向你",
+        "anchorVersion": "demo-cfr24-v1",
+        "anchorImageHash": "c7f533030683e945cbea35338fc7a385cdb851bc2b12c8b49bed6a1497fad157",
+        "snapshot": {
+          "pose": "跪地擦完看向你",
+          "anchorSource": "E13",
+          "anchorFrame": 0,
+          "scope": "first-demo-with-known-visual-differences"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "E00",
+        "from": "P0",
+        "to": "P0",
+        "video": {
+          "path": "media/video/E00.mp4",
+          "sha256": "5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f",
+          "bytes": 4221029
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 289,
+        "inFrame": 0,
+        "outFrameExclusive": 289,
+        "actualDurationSec": 12.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "安静看屏、偶尔前倾倾听",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E01",
+        "from": "P0",
+        "to": "P1",
+        "video": {
+          "path": "media/video/E01.mp4",
+          "sha256": "3da11404db595dbec25cbfea140b59d85b930f2fc49661d8dab7a9b5a945a78e",
+          "bytes": 3874127
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 289,
+        "inFrame": 0,
+        "outFrameExclusive": 289,
+        "actualDurationSec": 12.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "脱拖鞋收腿，抱枕窝好",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E02",
+        "from": "P1",
+        "to": "P0",
+        "video": {
+          "path": "media/video/E02.mp4",
+          "sha256": "96a24671651e7c6713f9a859a2085d3eac265214a6d5058f673eb17cbd562012",
+          "bytes": 3616358
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 289,
+        "inFrame": 0,
+        "outFrameExclusive": 289,
+        "actualDurationSec": 12.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "放枕下腿，穿回拖鞋坐好",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E05",
+        "from": "P0",
+        "to": "P3",
+        "video": {
+          "path": "media/video/E05.mp4",
+          "sha256": "86739d8a705f3a34a9e033e8283d45c15f0dd9ce57670ef6f09ca10a82f980d7",
+          "bytes": 3722267
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 289,
+        "inFrame": 0,
+        "outFrameExclusive": 289,
+        "actualDurationSec": 12.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "拿遥控器轻按",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E06",
+        "from": "P3",
+        "to": "P0",
+        "video": {
+          "path": "media/video/E06.mp4",
+          "sha256": "bc96381d591dc2910df40254f816c5300456d4b80f87ff05b2f54bfe17962d34",
+          "bytes": 3071631
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 240,
+        "inFrame": 0,
+        "outFrameExclusive": 240,
+        "actualDurationSec": 10,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "放回遥控器",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E08",
+        "from": "P0",
+        "to": "P4",
+        "video": {
+          "path": "media/video/E08.mp4",
+          "sha256": "2b73b21c7c92243b6770767e08402d359f7d1be5e202af0622c62461a1945f89",
+          "bytes": 3546829
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 289,
+        "inFrame": 0,
+        "outFrameExclusive": 289,
+        "actualDurationSec": 12.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "拿起薯片袋，向你递近示意分享后收回腿上",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E09",
+        "from": "P4",
+        "to": "P4",
+        "video": {
+          "path": "media/video/E09.mp4",
+          "sha256": "4385f534888f9bcebbe3e5ff5c2c05d03d51c945aace84e4bc2d60ab82938ffe",
+          "bytes": 4330432
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 361,
+        "inFrame": 0,
+        "outFrameExclusive": 361,
+        "actualDurationSec": 15.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "吃几片薯片，舔指被看见而害羞",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E10",
+        "from": "P4",
+        "to": "P0",
+        "video": {
+          "path": "media/video/E10.mp4",
+          "sha256": "823987f2e0a7eafb966f65a0084e5c0201d5275b8c165933fa925f123e5076ac",
+          "bytes": 3715181
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 289,
+        "inFrame": 0,
+        "outFrameExclusive": 289,
+        "actualDurationSec": 12.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "点头回应，侧身放回薯片后转回陪你看屏",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E12",
+        "from": "P8",
+        "to": "P5",
+        "video": {
+          "path": "media/video/E12.mp4",
+          "sha256": "a6aee3b093d5d450ae72a2840c6ba44355e802cac331b8c27408e319e3569536",
+          "bytes": 5332657
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 360,
+        "inFrame": 0,
+        "outFrameExclusive": 360,
+        "actualDurationSec": 15,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "拿布走近、跪地哈气擦屏",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E13",
+        "from": "P5",
+        "to": "P8",
+        "video": {
+          "path": "media/video/E13.mp4",
+          "sha256": "5e63502947b2e34e803f1d4ff853296d2bd3bea53b39723bd0fb1946082d0101",
+          "bytes": 4685458
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 361,
+        "inFrame": 0,
+        "outFrameExclusive": 361,
+        "actualDurationSec": 15.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "跪姿起身、携布归位",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E14",
+        "from": "P1",
+        "to": "P1",
+        "video": {
+          "path": "media/video/E14.mp4",
+          "sha256": "a9b0e60bf0f36a71e1310f3b28960e916eac67b6d02cbf7177e57dad3b24b31d",
+          "bytes": 3638528
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 289,
+        "inFrame": 0,
+        "outFrameExclusive": 289,
+        "actualDurationSec": 12.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "抱枕窝着，放松肩颈",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E16",
+        "from": "P0",
+        "to": "P0",
+        "video": {
+          "path": "media/video/E16.mp4",
+          "sha256": "9bac9b3026bbabb2bc91fb5451c9257b95f5c2ff4510350ffa1381f54bf8fddf",
+          "bytes": 5508340
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 361,
+        "inFrame": 0,
+        "outFrameExclusive": 361,
+        "actualDurationSec": 15.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "拿小猫短视频走近分享，再归位",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E17",
+        "from": "P8",
+        "to": "P8",
+        "video": {
+          "path": "media/video/E17.mp4",
+          "sha256": "bca0dd7b1c3f75178beb707d5adf98b687de67ffcbf8f62bd1a64ce769b84f3f",
+          "bytes": 5774199
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 360,
+        "inFrame": 0,
+        "outFrameExclusive": 360,
+        "actualDurationSec": 15,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "接电话走近示意，再归位",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E18",
+        "from": "P0",
+        "to": "P8",
+        "video": {
+          "path": "media/video/E18.mp4",
+          "sha256": "70d5000c8ed6c4de2005b712b1ffbf3a714a7772e89d6e2c82de3b49e37262db",
+          "bytes": 5174190
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 361,
+        "inFrame": 0,
+        "outFrameExclusive": 361,
+        "actualDurationSec": 15.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "起身走到窗边看夜景，回沙发旁站位",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E19",
+        "from": "P8",
+        "to": "P0",
+        "video": {
+          "path": "media/video/E19.mp4",
+          "sha256": "d30d158583c655de6c9b914592b55beccfa94396ee55348dbfd03dc1c2028ef7",
+          "bytes": 3782803
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 289,
+        "inFrame": 0,
+        "outFrameExclusive": 289,
+        "actualDurationSec": 12.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "对视邀请坐下，拍身旁空位后安顿",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E20",
+        "from": "P1",
+        "to": "P6",
+        "video": {
+          "path": "media/video/E20.mp4",
+          "sha256": "cc2b4d12c8499719dd7d3a0e217e360a3e2098b97a386374d32761fcf3de5cf3",
+          "bytes": 5591215
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 361,
+        "inFrame": 0,
+        "outFrameExclusive": 361,
+        "actualDurationSec": 15.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "移开手机，放枕侧躺",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E21",
+        "from": "P6",
+        "to": "P1",
+        "video": {
+          "path": "media/video/E21.mp4",
+          "sha256": "a62233c91eb5e018a7ea86e382934568ef6b9932e7d753df716bb47d13d35fb7",
+          "bytes": 4423847
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 361,
+        "inFrame": 0,
+        "outFrameExclusive": 361,
+        "actualDurationSec": 15.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "侧躺坐起，手机复位后抱枕",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E22",
+        "from": "P6",
+        "to": "P6",
+        "video": {
+          "path": "media/video/E22.mp4",
+          "sha256": "8e37e7f80cbbd052fd7c0af3e9bf4884e19a73e2bfc69635595b64c2150d9684",
+          "bytes": 4605722
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 361,
+        "inFrame": 0,
+        "outFrameExclusive": 361,
+        "actualDurationSec": 15.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "侧躺着看屏幕",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E23",
+        "from": "P6",
+        "to": "P7",
+        "video": {
+          "path": "media/video/E23.mp4",
+          "sha256": "6ce766c3eaf08b9a5900143f17ebc42161b7ef9375330d5c87758c4fa116a1a2",
+          "bytes": 4130662
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 361,
+        "inFrame": 0,
+        "outFrameExclusive": 361,
+        "actualDurationSec": 15.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "牵过毯子，侧躺入睡",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E24",
+        "from": "P7",
+        "to": "P7",
+        "video": {
+          "path": "media/video/E24.mp4",
+          "sha256": "c0cb2259cf51ea315a4093c2bb591b57ddc72865dbac0125b9195bc6deb838a2",
+          "bytes": 4266823
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 361,
+        "inFrame": 0,
+        "outFrameExclusive": 361,
+        "actualDurationSec": 15.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "安稳侧睡",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E25",
+        "from": "P7",
+        "to": "P6",
+        "video": {
+          "path": "media/video/E25.mp4",
+          "sha256": "fd0cb17e4e782a62ebae513b3ebb9d40c335278b2e4c91a6010b32734d765258",
+          "bytes": 4600102
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 361,
+        "inFrame": 0,
+        "outFrameExclusive": 361,
+        "actualDurationSec": 15.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "醒来缓神，整理毯子",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E26",
+        "from": "P4",
+        "to": "P4",
+        "video": {
+          "path": "media/video/E26.mp4",
+          "sha256": "2ff6e2594338bae816c7ef42f41e0f8969953c5d907319a98e069fea2bb1dacf",
+          "bytes": 4238828
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 361,
+        "inFrame": 0,
+        "outFrameExclusive": 361,
+        "actualDurationSec": 15.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "薯片有点辣，逞强后缓过来",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E27",
+        "from": "P5",
+        "to": "P5",
+        "video": {
+          "path": "media/video/E27.mp4",
+          "sha256": "1d241887e186457cf70ca8b907ab5fa60ec751ff14b2adc4fd37043da81a95fa",
+          "bytes": 3755673
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 288,
+        "inFrame": 0,
+        "outFrameExclusive": 288,
+        "actualDurationSec": 12,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "跪着检查屏幕，停留对视",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E28",
+        "from": "P0",
+        "to": "P0",
+        "video": {
+          "path": "media/video/E28.mp4",
+          "sha256": "6c810de51869100546eeeb564caaa11e6a71782757fef171fd5d15a7f6b50fe6",
+          "bytes": 5351357
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 361,
+        "inFrame": 0,
+        "outFrameExclusive": 361,
+        "actualDurationSec": 15.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "走近迎接，俯身看你再回坐",
+        "weight": 0.15,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E29",
+        "from": "P1",
+        "to": "P1",
+        "video": {
+          "path": "media/video/E29.mp4",
+          "sha256": "8b5e1ace7505d67f2e6734718f0c2ca9e7eef202cd39d7262d3a430f39bc924d",
+          "bytes": 3636833
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 289,
+        "inFrame": 0,
+        "outFrameExclusive": 289,
+        "actualDurationSec": 12.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "把抱枕搂紧，抬眼向你撒娇后放松",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E30",
+        "from": "P6",
+        "to": "P6",
+        "video": {
+          "path": "media/video/E30.mp4",
+          "sha256": "4c205d51e3e625bd3ffd6e294fbf2b8746f85e9c6fd3d1b422ad86654766ef80",
+          "bytes": 3502098
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 289,
+        "inFrame": 0,
+        "outFrameExclusive": 289,
+        "actualDurationSec": 12.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "侧躺打哈欠、揉眼，困了还想继续陪你",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E31",
+        "from": "P8",
+        "to": "P8",
+        "video": {
+          "path": "media/video/E31.mp4",
+          "sha256": "6d84c2ffabbe31835c5a27ffa5c061ce0633b6bfc693650363c8a123d1b6c967",
+          "bytes": 3204946
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 240,
+        "inFrame": 0,
+        "outFrameExclusive": 240,
+        "actualDurationSec": 10,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "站着伸懒腰，放松后看你",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      },
+      {
+        "id": "E32",
+        "from": "P3",
+        "to": "P3",
+        "video": {
+          "path": "media/video/E32.mp4",
+          "sha256": "dc329071afcf523ed694bf017d81be25bf00e56b5c7fe762fb8ea6600d5f86d4",
+          "bytes": 4825828
+        },
+        "profile": "opaque-video",
+        "decodedWidth": 1280,
+        "decodedHeight": 720,
+        "fpsNumerator": 24,
+        "fpsDenominator": 1,
+        "frameCount": 361,
+        "inFrame": 0,
+        "outFrameExclusive": 361,
+        "actualDurationSec": 15.041666666666666,
+        "sourceAnchorVersion": "demo-cfr24-v1",
+        "targetAnchorVersion": "demo-cfr24-v1",
+        "tag": "遥控器不灵，走近盘腿再试",
+        "weight": 1,
+        "cooldownGroup": null,
+        "cooldownSec": 0,
+        "initialDelaySec": 0,
+        "requiredCapabilities": [
+          "opaque-video",
+          "cut"
+        ]
+      }
+    ]
+  },
+  "joins": {
+    "schemaVersion": "1.0",
+    "joins": [
+      {
+        "incomingEdgeId": "__entry__",
+        "outgoingEdgeId": "E28",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "60d770c83b1f9c47f6b440396473173087ce263530adcd5e5e10981447396328",
+        "outgoingMediaHash": "6c810de51869100546eeeb564caaa11e6a71782757fef171fd5d15a7f6b50fe6",
+        "incomingTrimFingerprint": "poster",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/entry-E28.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "__entry__",
+        "outgoingEdgeId": "E00",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "60d770c83b1f9c47f6b440396473173087ce263530adcd5e5e10981447396328",
+        "outgoingMediaHash": "5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f",
+        "incomingTrimFingerprint": "poster",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/entry-E00.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E18",
+        "outgoingEdgeId": "E31",
+        "nodeId": "P8",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "70d5000c8ed6c4de2005b712b1ffbf3a714a7772e89d6e2c82de3b49e37262db",
+        "outgoingMediaHash": "6d84c2ffabbe31835c5a27ffa5c061ce0633b6bfc693650363c8a123d1b6c967",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:240:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E18-E31.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E18",
+        "outgoingEdgeId": "E12",
+        "nodeId": "P8",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "70d5000c8ed6c4de2005b712b1ffbf3a714a7772e89d6e2c82de3b49e37262db",
+        "outgoingMediaHash": "a6aee3b093d5d450ae72a2840c6ba44355e802cac331b8c27408e319e3569536",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:360:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E18-E12.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E18",
+        "outgoingEdgeId": "E19",
+        "nodeId": "P8",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "70d5000c8ed6c4de2005b712b1ffbf3a714a7772e89d6e2c82de3b49e37262db",
+        "outgoingMediaHash": "d30d158583c655de6c9b914592b55beccfa94396ee55348dbfd03dc1c2028ef7",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E18-E19.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E19",
+        "outgoingEdgeId": "E00",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "d30d158583c655de6c9b914592b55beccfa94396ee55348dbfd03dc1c2028ef7",
+        "outgoingMediaHash": "5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E19-E00.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E19",
+        "outgoingEdgeId": "E18",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "d30d158583c655de6c9b914592b55beccfa94396ee55348dbfd03dc1c2028ef7",
+        "outgoingMediaHash": "70d5000c8ed6c4de2005b712b1ffbf3a714a7772e89d6e2c82de3b49e37262db",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E19-E18.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E19",
+        "outgoingEdgeId": "E08",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "d30d158583c655de6c9b914592b55beccfa94396ee55348dbfd03dc1c2028ef7",
+        "outgoingMediaHash": "2b73b21c7c92243b6770767e08402d359f7d1be5e202af0622c62461a1945f89",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E19-E08.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E00",
+        "outgoingEdgeId": "E16",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f",
+        "outgoingMediaHash": "9bac9b3026bbabb2bc91fb5451c9257b95f5c2ff4510350ffa1381f54bf8fddf",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E00-E16.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E00",
+        "outgoingEdgeId": "E05",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f",
+        "outgoingMediaHash": "86739d8a705f3a34a9e033e8283d45c15f0dd9ce57670ef6f09ca10a82f980d7",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E00-E05.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E00",
+        "outgoingEdgeId": "E08",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f",
+        "outgoingMediaHash": "2b73b21c7c92243b6770767e08402d359f7d1be5e202af0622c62461a1945f89",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E00-E08.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E00",
+        "outgoingEdgeId": "E01",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f",
+        "outgoingMediaHash": "3da11404db595dbec25cbfea140b59d85b930f2fc49661d8dab7a9b5a945a78e",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E00-E01.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E00",
+        "outgoingEdgeId": "E18",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f",
+        "outgoingMediaHash": "70d5000c8ed6c4de2005b712b1ffbf3a714a7772e89d6e2c82de3b49e37262db",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E00-E18.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E00",
+        "outgoingEdgeId": "E00",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f",
+        "outgoingMediaHash": "5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E00-E00.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E08",
+        "outgoingEdgeId": "E09",
+        "nodeId": "P4",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "2b73b21c7c92243b6770767e08402d359f7d1be5e202af0622c62461a1945f89",
+        "outgoingMediaHash": "4385f534888f9bcebbe3e5ff5c2c05d03d51c945aace84e4bc2d60ab82938ffe",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E08-E09.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E08",
+        "outgoingEdgeId": "E26",
+        "nodeId": "P4",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "2b73b21c7c92243b6770767e08402d359f7d1be5e202af0622c62461a1945f89",
+        "outgoingMediaHash": "2ff6e2594338bae816c7ef42f41e0f8969953c5d907319a98e069fea2bb1dacf",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E08-E26.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E08",
+        "outgoingEdgeId": "E10",
+        "nodeId": "P4",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "2b73b21c7c92243b6770767e08402d359f7d1be5e202af0622c62461a1945f89",
+        "outgoingMediaHash": "823987f2e0a7eafb966f65a0084e5c0201d5275b8c165933fa925f123e5076ac",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E08-E10.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E10",
+        "outgoingEdgeId": "E00",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "823987f2e0a7eafb966f65a0084e5c0201d5275b8c165933fa925f123e5076ac",
+        "outgoingMediaHash": "5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E10-E00.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E10",
+        "outgoingEdgeId": "E18",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "823987f2e0a7eafb966f65a0084e5c0201d5275b8c165933fa925f123e5076ac",
+        "outgoingMediaHash": "70d5000c8ed6c4de2005b712b1ffbf3a714a7772e89d6e2c82de3b49e37262db",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E10-E18.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E09",
+        "outgoingEdgeId": "E10",
+        "nodeId": "P4",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "4385f534888f9bcebbe3e5ff5c2c05d03d51c945aace84e4bc2d60ab82938ffe",
+        "outgoingMediaHash": "823987f2e0a7eafb966f65a0084e5c0201d5275b8c165933fa925f123e5076ac",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E09-E10.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E26",
+        "outgoingEdgeId": "E10",
+        "nodeId": "P4",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "2ff6e2594338bae816c7ef42f41e0f8969953c5d907319a98e069fea2bb1dacf",
+        "outgoingMediaHash": "823987f2e0a7eafb966f65a0084e5c0201d5275b8c165933fa925f123e5076ac",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E26-E10.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E05",
+        "outgoingEdgeId": "E32",
+        "nodeId": "P3",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "86739d8a705f3a34a9e033e8283d45c15f0dd9ce57670ef6f09ca10a82f980d7",
+        "outgoingMediaHash": "dc329071afcf523ed694bf017d81be25bf00e56b5c7fe762fb8ea6600d5f86d4",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E05-E32.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E05",
+        "outgoingEdgeId": "E06",
+        "nodeId": "P3",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "86739d8a705f3a34a9e033e8283d45c15f0dd9ce57670ef6f09ca10a82f980d7",
+        "outgoingMediaHash": "bc96381d591dc2910df40254f816c5300456d4b80f87ff05b2f54bfe17962d34",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:240:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E05-E06.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E06",
+        "outgoingEdgeId": "E00",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "bc96381d591dc2910df40254f816c5300456d4b80f87ff05b2f54bfe17962d34",
+        "outgoingMediaHash": "5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f",
+        "incomingTrimFingerprint": "0:240:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E06-E00.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E32",
+        "outgoingEdgeId": "E06",
+        "nodeId": "P3",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "dc329071afcf523ed694bf017d81be25bf00e56b5c7fe762fb8ea6600d5f86d4",
+        "outgoingMediaHash": "bc96381d591dc2910df40254f816c5300456d4b80f87ff05b2f54bfe17962d34",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:240:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E32-E06.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E01",
+        "outgoingEdgeId": "E14",
+        "nodeId": "P1",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "3da11404db595dbec25cbfea140b59d85b930f2fc49661d8dab7a9b5a945a78e",
+        "outgoingMediaHash": "a9b0e60bf0f36a71e1310f3b28960e916eac67b6d02cbf7177e57dad3b24b31d",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E01-E14.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E01",
+        "outgoingEdgeId": "E02",
+        "nodeId": "P1",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "3da11404db595dbec25cbfea140b59d85b930f2fc49661d8dab7a9b5a945a78e",
+        "outgoingMediaHash": "96a24671651e7c6713f9a859a2085d3eac265214a6d5058f673eb17cbd562012",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E01-E02.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E02",
+        "outgoingEdgeId": "E00",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "96a24671651e7c6713f9a859a2085d3eac265214a6d5058f673eb17cbd562012",
+        "outgoingMediaHash": "5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E02-E00.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E14",
+        "outgoingEdgeId": "E29",
+        "nodeId": "P1",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "a9b0e60bf0f36a71e1310f3b28960e916eac67b6d02cbf7177e57dad3b24b31d",
+        "outgoingMediaHash": "8b5e1ace7505d67f2e6734718f0c2ca9e7eef202cd39d7262d3a430f39bc924d",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E14-E29.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E14",
+        "outgoingEdgeId": "E14",
+        "nodeId": "P1",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "a9b0e60bf0f36a71e1310f3b28960e916eac67b6d02cbf7177e57dad3b24b31d",
+        "outgoingMediaHash": "a9b0e60bf0f36a71e1310f3b28960e916eac67b6d02cbf7177e57dad3b24b31d",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E14-E14.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E14",
+        "outgoingEdgeId": "E02",
+        "nodeId": "P1",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "a9b0e60bf0f36a71e1310f3b28960e916eac67b6d02cbf7177e57dad3b24b31d",
+        "outgoingMediaHash": "96a24671651e7c6713f9a859a2085d3eac265214a6d5058f673eb17cbd562012",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E14-E02.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E29",
+        "outgoingEdgeId": "E20",
+        "nodeId": "P1",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "8b5e1ace7505d67f2e6734718f0c2ca9e7eef202cd39d7262d3a430f39bc924d",
+        "outgoingMediaHash": "cc2b4d12c8499719dd7d3a0e217e360a3e2098b97a386374d32761fcf3de5cf3",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E29-E20.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E29",
+        "outgoingEdgeId": "E02",
+        "nodeId": "P1",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "8b5e1ace7505d67f2e6734718f0c2ca9e7eef202cd39d7262d3a430f39bc924d",
+        "outgoingMediaHash": "96a24671651e7c6713f9a859a2085d3eac265214a6d5058f673eb17cbd562012",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E29-E02.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E20",
+        "outgoingEdgeId": "E22",
+        "nodeId": "P6",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "cc2b4d12c8499719dd7d3a0e217e360a3e2098b97a386374d32761fcf3de5cf3",
+        "outgoingMediaHash": "8e37e7f80cbbd052fd7c0af3e9bf4884e19a73e2bfc69635595b64c2150d9684",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E20-E22.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E20",
+        "outgoingEdgeId": "E21",
+        "nodeId": "P6",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "cc2b4d12c8499719dd7d3a0e217e360a3e2098b97a386374d32761fcf3de5cf3",
+        "outgoingMediaHash": "a62233c91eb5e018a7ea86e382934568ef6b9932e7d753df716bb47d13d35fb7",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E20-E21.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E20",
+        "outgoingEdgeId": "E30",
+        "nodeId": "P6",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "cc2b4d12c8499719dd7d3a0e217e360a3e2098b97a386374d32761fcf3de5cf3",
+        "outgoingMediaHash": "4c205d51e3e625bd3ffd6e294fbf2b8746f85e9c6fd3d1b422ad86654766ef80",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E20-E30.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E20",
+        "outgoingEdgeId": "E23",
+        "nodeId": "P6",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "cc2b4d12c8499719dd7d3a0e217e360a3e2098b97a386374d32761fcf3de5cf3",
+        "outgoingMediaHash": "6ce766c3eaf08b9a5900143f17ebc42161b7ef9375330d5c87758c4fa116a1a2",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E20-E23.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E21",
+        "outgoingEdgeId": "E02",
+        "nodeId": "P1",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "a62233c91eb5e018a7ea86e382934568ef6b9932e7d753df716bb47d13d35fb7",
+        "outgoingMediaHash": "96a24671651e7c6713f9a859a2085d3eac265214a6d5058f673eb17cbd562012",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E21-E02.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E22",
+        "outgoingEdgeId": "E30",
+        "nodeId": "P6",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "8e37e7f80cbbd052fd7c0af3e9bf4884e19a73e2bfc69635595b64c2150d9684",
+        "outgoingMediaHash": "4c205d51e3e625bd3ffd6e294fbf2b8746f85e9c6fd3d1b422ad86654766ef80",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E22-E30.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E22",
+        "outgoingEdgeId": "E22",
+        "nodeId": "P6",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "8e37e7f80cbbd052fd7c0af3e9bf4884e19a73e2bfc69635595b64c2150d9684",
+        "outgoingMediaHash": "8e37e7f80cbbd052fd7c0af3e9bf4884e19a73e2bfc69635595b64c2150d9684",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E22-E22.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E22",
+        "outgoingEdgeId": "E21",
+        "nodeId": "P6",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "8e37e7f80cbbd052fd7c0af3e9bf4884e19a73e2bfc69635595b64c2150d9684",
+        "outgoingMediaHash": "a62233c91eb5e018a7ea86e382934568ef6b9932e7d753df716bb47d13d35fb7",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E22-E21.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E30",
+        "outgoingEdgeId": "E23",
+        "nodeId": "P6",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "4c205d51e3e625bd3ffd6e294fbf2b8746f85e9c6fd3d1b422ad86654766ef80",
+        "outgoingMediaHash": "6ce766c3eaf08b9a5900143f17ebc42161b7ef9375330d5c87758c4fa116a1a2",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E30-E23.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E30",
+        "outgoingEdgeId": "E21",
+        "nodeId": "P6",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "4c205d51e3e625bd3ffd6e294fbf2b8746f85e9c6fd3d1b422ad86654766ef80",
+        "outgoingMediaHash": "a62233c91eb5e018a7ea86e382934568ef6b9932e7d753df716bb47d13d35fb7",
+        "incomingTrimFingerprint": "0:289:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E30-E21.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E23",
+        "outgoingEdgeId": "E24",
+        "nodeId": "P7",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "6ce766c3eaf08b9a5900143f17ebc42161b7ef9375330d5c87758c4fa116a1a2",
+        "outgoingMediaHash": "c0cb2259cf51ea315a4093c2bb591b57ddc72865dbac0125b9195bc6deb838a2",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E23-E24.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E23",
+        "outgoingEdgeId": "E25",
+        "nodeId": "P7",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "6ce766c3eaf08b9a5900143f17ebc42161b7ef9375330d5c87758c4fa116a1a2",
+        "outgoingMediaHash": "fd0cb17e4e782a62ebae513b3ebb9d40c335278b2e4c91a6010b32734d765258",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E23-E25.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E25",
+        "outgoingEdgeId": "E21",
+        "nodeId": "P6",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "fd0cb17e4e782a62ebae513b3ebb9d40c335278b2e4c91a6010b32734d765258",
+        "outgoingMediaHash": "a62233c91eb5e018a7ea86e382934568ef6b9932e7d753df716bb47d13d35fb7",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E25-E21.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E24",
+        "outgoingEdgeId": "E25",
+        "nodeId": "P7",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "c0cb2259cf51ea315a4093c2bb591b57ddc72865dbac0125b9195bc6deb838a2",
+        "outgoingMediaHash": "fd0cb17e4e782a62ebae513b3ebb9d40c335278b2e4c91a6010b32734d765258",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E24-E25.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E24",
+        "outgoingEdgeId": "E24",
+        "nodeId": "P7",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "c0cb2259cf51ea315a4093c2bb591b57ddc72865dbac0125b9195bc6deb838a2",
+        "outgoingMediaHash": "c0cb2259cf51ea315a4093c2bb591b57ddc72865dbac0125b9195bc6deb838a2",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E24-E24.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E12",
+        "outgoingEdgeId": "E27",
+        "nodeId": "P5",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "a6aee3b093d5d450ae72a2840c6ba44355e802cac331b8c27408e319e3569536",
+        "outgoingMediaHash": "1d241887e186457cf70ca8b907ab5fa60ec751ff14b2adc4fd37043da81a95fa",
+        "incomingTrimFingerprint": "0:360:24/1",
+        "outgoingTrimFingerprint": "0:288:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E12-E27.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E12",
+        "outgoingEdgeId": "E13",
+        "nodeId": "P5",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "a6aee3b093d5d450ae72a2840c6ba44355e802cac331b8c27408e319e3569536",
+        "outgoingMediaHash": "5e63502947b2e34e803f1d4ff853296d2bd3bea53b39723bd0fb1946082d0101",
+        "incomingTrimFingerprint": "0:360:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E12-E13.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E13",
+        "outgoingEdgeId": "E19",
+        "nodeId": "P8",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "5e63502947b2e34e803f1d4ff853296d2bd3bea53b39723bd0fb1946082d0101",
+        "outgoingMediaHash": "d30d158583c655de6c9b914592b55beccfa94396ee55348dbfd03dc1c2028ef7",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E13-E19.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E27",
+        "outgoingEdgeId": "E13",
+        "nodeId": "P5",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "1d241887e186457cf70ca8b907ab5fa60ec751ff14b2adc4fd37043da81a95fa",
+        "outgoingMediaHash": "5e63502947b2e34e803f1d4ff853296d2bd3bea53b39723bd0fb1946082d0101",
+        "incomingTrimFingerprint": "0:288:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E27-E13.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E27",
+        "outgoingEdgeId": "E27",
+        "nodeId": "P5",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "1d241887e186457cf70ca8b907ab5fa60ec751ff14b2adc4fd37043da81a95fa",
+        "outgoingMediaHash": "1d241887e186457cf70ca8b907ab5fa60ec751ff14b2adc4fd37043da81a95fa",
+        "incomingTrimFingerprint": "0:288:24/1",
+        "outgoingTrimFingerprint": "0:288:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E27-E27.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E28",
+        "outgoingEdgeId": "E00",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "6c810de51869100546eeeb564caaa11e6a71782757fef171fd5d15a7f6b50fe6",
+        "outgoingMediaHash": "5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E28-E00.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E28",
+        "outgoingEdgeId": "E18",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "6c810de51869100546eeeb564caaa11e6a71782757fef171fd5d15a7f6b50fe6",
+        "outgoingMediaHash": "70d5000c8ed6c4de2005b712b1ffbf3a714a7772e89d6e2c82de3b49e37262db",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E28-E18.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E16",
+        "outgoingEdgeId": "E18",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "9bac9b3026bbabb2bc91fb5451c9257b95f5c2ff4510350ffa1381f54bf8fddf",
+        "outgoingMediaHash": "70d5000c8ed6c4de2005b712b1ffbf3a714a7772e89d6e2c82de3b49e37262db",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:361:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E16-E18.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E16",
+        "outgoingEdgeId": "E00",
+        "nodeId": "P0",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "9bac9b3026bbabb2bc91fb5451c9257b95f5c2ff4510350ffa1381f54bf8fddf",
+        "outgoingMediaHash": "5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f",
+        "incomingTrimFingerprint": "0:361:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E16-E00.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E17",
+        "outgoingEdgeId": "E19",
+        "nodeId": "P8",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "bca0dd7b1c3f75178beb707d5adf98b687de67ffcbf8f62bd1a64ce769b84f3f",
+        "outgoingMediaHash": "d30d158583c655de6c9b914592b55beccfa94396ee55348dbfd03dc1c2028ef7",
+        "incomingTrimFingerprint": "0:360:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E17-E19.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E31",
+        "outgoingEdgeId": "E17",
+        "nodeId": "P8",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "6d84c2ffabbe31835c5a27ffa5c061ce0633b6bfc693650363c8a123d1b6c967",
+        "outgoingMediaHash": "bca0dd7b1c3f75178beb707d5adf98b687de67ffcbf8f62bd1a64ce769b84f3f",
+        "incomingTrimFingerprint": "0:240:24/1",
+        "outgoingTrimFingerprint": "0:360:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E31-E17.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      },
+      {
+        "incomingEdgeId": "E31",
+        "outgoingEdgeId": "E19",
+        "nodeId": "P8",
+        "status": "approved",
+        "method": "cut",
+        "blendFrames": 0,
+        "incomingMediaOrPosterHash": "6d84c2ffabbe31835c5a27ffa5c061ce0633b6bfc693650363c8a123d1b6c967",
+        "outgoingMediaHash": "d30d158583c655de6c9b914592b55beccfa94396ee55348dbfd03dc1c2028ef7",
+        "incomingTrimFingerprint": "0:240:24/1",
+        "outgoingTrimFingerprint": "0:289:24/1",
+        "anchorVersion": "demo-cfr24-v1",
+        "evidencePath": "reviews/E31-E19.json",
+        "approvedAt": "2026-09-18T10:49:39.5572042Z",
+        "approvedBy": "user (first demo tolerance; inherited source acceptance, CFR boundaries rechecked by Codex)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+import { spawn } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
+const packaged = path.resolve('release/SofaMate/SofaMate.exe');
+const built = path.resolve('experiments/tauri-client/src-tauri/target/release/screenmate-trial.exe');
+const exe = fs.existsSync(packaged) ? packaged : built;
+if (!fs.existsSync(exe)) throw Error('请先运行 npm run build 和 npm run package:dir');
+const child = spawn(exe, process.argv.slice(2), { detached: true, stdio: 'ignore', windowsHide: true });
+child.unref();
+console.log(`已启动 ${exe}`);

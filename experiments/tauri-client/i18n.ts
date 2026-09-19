@@ -1,0 +1,287 @@
+export type Locale = 'zh-CN' | 'en' | 'ja';
+export const translations: Record<string, readonly [string, string, string]> = {
+  登录: ['登录', 'Sign in', 'ログイン'],
+  '登录 SofaMate': ['登录 SofaMate', 'Sign in to SofaMate', 'SofaMate にログイン'],
+  退出登录: ['退出登录', 'Sign out', 'ログアウト'],
+  关闭: ['关闭', 'Close', '閉じる'],
+  管理账号: ['管理账号', 'Manage account', 'アカウント管理'],
+  在浏览器中登录: ['在浏览器中登录', 'Continue in browser', 'ブラウザでログイン'],
+  '已登录，可以分享和管理你的壁纸。': ['已登录，可以分享和管理你的壁纸。', 'You can now share and manage your wallpapers.', '壁紙を共有・管理できます。'],
+  '支持邮箱、GitHub 和 Google。登录后即可分享壁纸。': ['支持邮箱、GitHub 和 Google。登录后即可分享壁纸。', 'Sign in with email, GitHub or Google to share wallpapers.', 'メール、GitHub、Google でログインして壁紙を共有。'],
+  '请核对浏览器中的配对码，完成登录后确认连接。': ['请核对浏览器中的配对码，完成登录后确认连接。', 'Check this code in your browser, then confirm the connection.', 'ブラウザのコードを確認し、接続を承認してください。'],
+  在线社区: ['在线社区', 'Online community', 'オンラインコミュニティ'],
+  '将视频与九宫格发布到社区，让其他人发现你的画面。': ['将视频与九宫格发布到社区，让其他人发现你的画面。', 'Share your video and preview with the community.', '動画とプレビューをコミュニティで共有します。'],
+  '复制链接，让朋友在浏览器中预览和下载。': ['复制链接，让朋友在浏览器中预览和下载。', 'Share this link so others can preview and download.', 'リンクからプレビューとダウンロードができます。'],
+  '分享链接已复制。': ['分享链接已复制。', 'Share link copied.', '共有リンクをコピーしました。'],
+  '分享已发布。': ['分享已发布。', 'Wallpaper published.', '壁紙を公開しました。'],
+  请先登录后再分享: ['请先登录后再分享', 'Sign in to share wallpapers.', '共有するにはログインしてください。'],
+  '登录已过期，请重新登录': ['登录已过期，请重新登录', 'Your session expired. Please sign in again.', 'セッションが切れました。再度ログインしてください。'],
+  '无法连接分享市场，请检查网络': ['无法连接分享市场，请检查网络', 'Cannot reach the community. Check your connection.', '接続できません。ネットワークを確認してください。'],
+  播放预览: ['播放预览', 'Play preview', 'プレビューを再生'],
+  暂停预览: ['暂停预览', 'Pause preview', 'プレビューを一時停止'],
+  预览音量: ['预览音量', 'Preview volume', 'プレビューの音量'],
+  桌面壁纸: ['桌面壁纸', 'Desktop wallpaper', 'デスクトップ壁紙'],
+  壁纸控制: ['壁纸控制', 'Wallpaper controls', '壁紙の操作'],
+  暂停壁纸: ['暂停壁纸', 'Pause wallpaper', '壁紙を一時停止'],
+  继续壁纸: ['继续壁纸', 'Resume wallpaper', '壁紙を再開'],
+  停止壁纸: ['停止壁纸', 'Stop wallpaper', '壁紙を停止'],
+  壁纸音量: ['壁纸音量', 'Wallpaper volume', '壁紙の音量'],
+  精选主题: ['精选主题', 'Featured', 'おすすめ'],
+  我的壁纸: ['我的壁纸', 'My wallpapers', 'マイ壁紙'],
+  分享市场: ['分享市场', 'Community', 'コミュニティ'],
+  壁纸来源: ['壁纸来源', 'Wallpaper library', '壁紙ライブラリ'],
+  导入视频: ['导入视频', 'Import video', '動画を追加'],
+  语言: ['语言', 'Language', '言語'],
+  '退出 SofaMate': ['退出 SofaMate', 'Quit SofaMate', 'SofaMate を終了'],
+  搜索主题: ['搜索主题', 'Search themes', 'テーマを検索'],
+  搜索壁纸: ['搜索壁纸', 'Search wallpapers', '壁紙を検索'],
+  搜索精选主题: ['搜索精选主题', 'Search featured themes', 'おすすめテーマを検索'],
+  搜索我的壁纸: ['搜索我的壁纸', 'Search my wallpapers', 'マイ壁紙を検索'],
+  '留一点时间，给生活。': [
+    '留一点时间，给生活。',
+    'A little room for everyday life.',
+    '日常に、くつろぎの時間を。',
+  ],
+  '选择主题，预览一段日常': [
+    '选择主题，预览一段日常',
+    'Choose a scene to preview.',
+    'テーマを選んでプレビュー',
+  ],
+  '单个视频最大 1GB': ['单个视频最大 1GB', 'Up to 1 GB per video', '動画は 1 GB まで'],
+  '已安装的主题和视频，都在这里': [
+    '已安装的主题和视频，都在这里',
+    'Your installed themes and videos',
+    'インストール済みのテーマと動画',
+  ],
+  没有找到匹配的壁纸: ['没有找到匹配的壁纸', 'No wallpapers found', '壁紙が見つかりません'],
+  '试试其他名字，或清空搜索查看全部。': [
+    '试试其他名字，或清空搜索查看全部。',
+    'Try another name or clear the search.',
+    '別の名前を試すか、検索をクリアしてください。',
+  ],
+  收藏一段喜欢的画面: [
+    '收藏一段喜欢的画面',
+    'Make room for a favorite moment',
+    'お気に入りの風景をデスクトップに',
+  ],
+  '点击「导入视频」，开始布置你的桌面。': [
+    '点击「导入视频」，开始布置你的桌面。',
+    'Import a video to make it your wallpaper.',
+    '動画を追加して壁紙に設定しましょう。',
+  ],
+  精选主题尚未安装: [
+    '精选主题尚未安装',
+    'No featured themes installed',
+    'おすすめテーマは未インストールです',
+  ],
+  '可以先导入自己的视频，或从分享市场下载壁纸。': [
+    '可以先导入自己的视频，或从分享市场下载壁纸。',
+    'Import a video or download one from Community.',
+    '動画を追加するか、コミュニティからダウンロードできます。',
+  ],
+  已保存到本机: ['已保存到本机', 'Saved locally', '保存済み'],
+  当前壁纸: ['当前壁纸', 'Active wallpaper', '使用中の壁紙'],
+  浏览中: ['浏览中', 'Previewing', 'プレビュー中'],
+  预览尚未生成: ['预览尚未生成', 'Preview needed', 'プレビュー未作成'],
+  视频九宫格预览: ['视频九宫格预览', 'Nine-frame video preview', '動画の 9 コマプレビュー'],
+  上一张壁纸: ['上一张壁纸', 'Previous wallpaper', '前の壁紙'],
+  下一张壁纸: ['下一张壁纸', 'Next wallpaper', '次の壁紙'],
+  生成九宫格预览: ['生成九宫格预览', 'Create preview', 'プレビューを作成'],
+  预览视频: ['预览视频', 'Preview video', '動画をプレビュー'],
+  查看九宫格: ['查看九宫格', 'Show contact sheet', '9 コマを表示'],
+  分辨率与下载: ['分辨率与下载', 'Quality & downloads', '画質・ダウンロード'],
+  '当前选择 · 已安装': ['当前选择 · 已安装', 'Selected · Installed', '選択中・インストール済み'],
+  已安装: ['已安装', 'Installed', 'インストール済み'],
+  下载: ['下载', 'Download', 'ダウンロード'],
+  尚未制作: ['尚未制作', 'Not available yet', '準備中'],
+  完整场景制作中: ['完整场景制作中', 'Full theme in production', '完全版を制作中'],
+  离线可用: ['离线可用', 'Available offline', 'オフラインで利用可能'],
+  此规格已可离线使用: [
+    '此规格已可离线使用',
+    'This quality is available offline.',
+    'この画質はオフラインで利用できます。',
+  ],
+  暂不可下载: ['暂不可下载', 'Not available for download yet', '現在ダウンロードできません'],
+  '下载完成后，即可离线使用。': [
+    '下载完成后，即可离线使用。',
+    'Use offline after downloading.',
+    'ダウンロード後はオフラインで利用できます。',
+  ],
+  暂停: ['暂停', 'Pause', '一時停止'],
+  继续: ['继续', 'Resume', '再開'],
+  停止: ['停止', 'Stop', '停止'],
+  停止壁纸并释放播放器: [
+    '停止壁纸并释放播放器',
+    'Stop wallpaper and release the player',
+    '壁紙を停止してプレーヤーを解放',
+  ],
+  音量: ['音量', 'Volume', '音量'],
+  正在播放: ['正在播放', 'Playing', '再生中'],
+  正在启动: ['正在启动', 'Starting…', '起動中…'],
+  已暂停: ['已暂停', 'Paused', '一時停止中'],
+  已停止: ['已停止', 'Stopped', '停止中'],
+  播放遇到问题: ['播放遇到问题', 'Playback error', '再生エラー'],
+  设为壁纸: ['设为壁纸', 'Set as wallpaper', '壁紙に設定'],
+  返回桌面: ['返回桌面', 'Back to desktop', 'デスクトップへ'],
+  分享: ['分享', 'Share', '共有'],
+  精选主题暂不支持分享: [
+    '精选主题暂不支持分享',
+    'Featured themes cannot be shared yet.',
+    'おすすめテーマは共有できません。',
+  ],
+  '已启动，请返回桌面观看': [
+    '已启动，请返回桌面观看',
+    'Started. Return to your desktop to watch.',
+    '起動しました。デスクトップでご覧ください。',
+  ],
+  '已停止，桌面播放资源已释放': [
+    '已停止，桌面播放资源已释放',
+    'Stopped. Wallpaper playback resources released.',
+    '停止しました。壁紙の再生リソースを解放しました。',
+  ],
+  '发现喜欢的画面，下载后离线使用。': [
+    '发现喜欢的画面，下载后离线使用。',
+    'Find a favorite and enjoy it offline.',
+    'お気に入りを見つけて、オフラインでも楽しめます。',
+  ],
+  '搜索壁纸、作者': ['搜索壁纸、作者', 'Search wallpapers or creators', '壁紙・作者を検索'],
+  搜索: ['搜索', 'Search', '検索'],
+  本机市场: ['本机市场', 'Local community', 'ローカルコミュニティ'],
+  加载更多: ['加载更多', 'Load more', 'さらに表示'],
+  '正在读取市场…': ['正在读取市场…', 'Loading community…', '読み込み中…'],
+  '{n} 条分享': ['{n} 条分享', '{n} shared wallpapers', '{n} 件の壁紙'],
+  '还没有分享。导入视频后，可以发布第一条。': [
+    '还没有分享。导入视频后，可以发布第一条。',
+    'No wallpapers yet. Import a video to share the first one.',
+    'まだ壁紙がありません。動画を追加して共有できます。',
+  ],
+  '请先运行“启动本机市场.cmd”，再重试。': [
+    '请先运行“启动本机市场.cmd”，再重试。',
+    'Run “启动本机市场.cmd” first, then try again.',
+    '先に「启动本机市场.cmd」を実行してから再試行してください。',
+  ],
+  '已下载 · 使用': ['已下载 · 使用', 'Use downloaded', '保存済み・使用'],
+  下载壁纸: ['下载壁纸', 'Download wallpaper', '壁紙をダウンロード'],
+  分享链接: ['分享链接', 'Share link', '共有リンク'],
+  撤回分享: ['撤回分享', 'Unpublish', '公開を取り消す'],
+  '分享已撤回，已下载的本机文件不受影响。': [
+    '分享已撤回，已下载的本机文件不受影响。',
+    'Unpublished. Downloaded copies are unaffected.',
+    '公開を取り消しました。保存済みのファイルは残ります。',
+  ],
+  '下载完成，已加入我的壁纸。': [
+    '下载完成，已加入我的壁纸。',
+    'Downloaded to My wallpapers.',
+    'マイ壁紙に保存しました。',
+  ],
+  分享壁纸: ['分享壁纸', 'Share wallpaper', '壁紙を共有'],
+  '将视频与九宫格发布到本机市场，供其他本机用户下载。': [
+    '将视频与九宫格发布到本机市场，供其他本机用户下载。',
+    'Publish the video and preview to this local community.',
+    '動画とプレビューをローカルコミュニティに公開します。',
+  ],
+  标题: ['标题', 'Title', 'タイトル'],
+  作者昵称: ['作者昵称', 'Creator name', '作者名'],
+  本机创作者: ['本机创作者', 'Local creator', 'ローカルの作者'],
+  简介: ['简介', 'Description', '説明'],
+  '介绍一下这段画面…': ['介绍一下这段画面…', 'Tell us about this scene…', 'この風景について…'],
+  取消: ['取消', 'Cancel', 'キャンセル'],
+  发布分享: ['发布分享', 'Publish', '公開'],
+  分享已发布: ['分享已发布', 'Wallpaper published', '公開しました'],
+  '复制链接，可在本机浏览器打开预览页。': [
+    '复制链接，可在本机浏览器打开预览页。',
+    'Copy the link to preview in a browser on this computer.',
+    'リンクをコピーすると、このパソコンのブラウザーで確認できます。',
+  ],
+  本机分享链接: ['本机分享链接', 'Local sharing link', 'ローカル共有リンク'],
+  复制链接: ['复制链接', 'Copy link', 'リンクをコピー'],
+  完成: ['完成', 'Done', '完了'],
+  '本机分享链接已复制。': ['本机分享链接已复制。', 'Local link copied.', 'ローカルリンクをコピーしました。'],
+  '请按 Ctrl+C 复制已选中的链接。': [
+    '请按 Ctrl+C 复制已选中的链接。',
+    'Press Ctrl+C to copy the selected link.',
+    'Ctrl+C で選択中のリンクをコピーしてください。',
+  ],
+  '分享已发布到本机市场。': [
+    '分享已发布到本机市场。',
+    'Published to the local community.',
+    'ローカルコミュニティに公開しました。',
+  ],
+  正在生成九宫格: ['正在生成九宫格', 'Creating preview', 'プレビューを作成中'],
+  正在导入: ['正在导入', 'Importing', '追加中'],
+  正在上传视频: ['正在上传视频', 'Uploading video', '動画をアップロード中'],
+  正在上传九宫格: ['正在上传九宫格', 'Uploading preview', 'プレビューをアップロード中'],
+  正在发布: ['正在发布', 'Publishing', '公開中'],
+  正在分享: ['正在分享', 'Sharing', '共有中'],
+  正在下载: ['正在下载', 'Downloading', 'ダウンロード中'],
+  正在撤回: ['正在撤回', 'Unpublishing', '公開を取り消し中'],
+  '视频已导入，生成预览后即可使用。': [
+    '视频已导入，生成预览后即可使用。',
+    'Video imported. Create a preview to use it.',
+    '動画を追加しました。プレビューを作成すると使用できます。',
+  ],
+  操作已取消: ['操作已取消', 'Cancelled', 'キャンセルしました'],
+  '正在处理另一个文件，请稍候': [
+    '正在处理另一个文件，请稍候',
+    'Another file is being processed. Please wait.',
+    '別のファイルを処理中です。しばらくお待ちください。',
+  ],
+  '请使用 H.264 / AAC 编码的 MP4 视频。': [
+    '请使用 H.264 / AAC 编码的 MP4 视频。',
+    'Use an MP4 with H.264 video and optional AAC audio.',
+    'H.264 動画・AAC 音声の MP4 を使用してください。',
+  ],
+  '视频不能超过 1GB。': [
+    '视频不能超过 1GB。',
+    'Videos must not exceed 1 GB.',
+    '動画は 1 GB 以下にしてください。',
+  ],
+  '文件校验失败，请重新下载。': [
+    '文件校验失败，请重新下载。',
+    'File verification failed. Download it again.',
+    'ファイルの検証に失敗しました。再度ダウンロードしてください。',
+  ],
+  '预览生成失败，请重试。': [
+    '预览生成失败，请重试。',
+    'Could not create the preview. Try again.',
+    'プレビューを作成できませんでした。再試行してください。',
+  ],
+  '播放未能启动，请重试。': [
+    '播放未能启动，请重试。',
+    'Playback could not start. Please try again.',
+    '再生を開始できませんでした。再試行してください。',
+  ],
+  '操作失败，请重试。': [
+    '操作失败，请重试。',
+    'Something went wrong. Please try again.',
+    '処理に失敗しました。再試行してください。',
+  ],
+  '主题播放遇到问题，请重新设为壁纸。': [
+    '主题播放遇到问题，请重新设为壁纸。',
+    'Playback stopped unexpectedly. Set the wallpaper again.',
+    '再生中に問題が発生しました。壁紙を再設定してください。',
+  ],
+};
+let locale: Locale = 'zh-CN';
+export const getLocale = () => locale;
+export function setLocale(value: string) {
+  locale = value === 'en' || value === 'ja' ? value : 'zh-CN';
+  if (typeof document !== 'undefined') document.documentElement.lang = locale;
+}
+export function t(key: string, values: Record<string, string | number> = {}) {
+  const text = translations[key]?.[locale === 'en' ? 1 : locale === 'ja' ? 2 : 0] ?? key;
+  return text.replace(/\{(\w+)\}/g, (_, name) => String(values[name] ?? `{${name}}`));
+}
+export function errorMessage(error: unknown) {
+  const raw = error instanceof Error ? error.message : String(error);
+  console.error(raw);
+  if (translations[raw]) return t(raw);
+  if (/取消|cancel/i.test(raw)) return t('操作已取消');
+  if (/另一个|busy/i.test(raw)) return t('正在处理另一个文件，请稍候');
+  if (/无法连接本机市场|连接|connect/i.test(raw)) return t('请先运行“启动本机市场.cmd”，再重试。');
+  if (/1GB|1 GB|too large|过大|超出.*大小/i.test(raw)) return t('视频不能超过 1GB。');
+  if (/校验|checksum|hash/i.test(raw)) return t('文件校验失败，请重新下载。');
+  if (/解码|MP4|编码|视频.*无效/i.test(raw)) return t('请使用 H.264 / AAC 编码的 MP4 视频。');
+  if (/预览|JPEG|jpeg/i.test(raw)) return t('预览生成失败，请重试。');
+  return t('操作失败，请重试。');
+}

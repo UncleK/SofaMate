@@ -1,0 +1,1 @@
+{ "identifier": "trial-windows", "windows": ["controls", "wallpaper"], "permissions": ["core:event:default"] }

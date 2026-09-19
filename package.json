@@ -1,0 +1,33 @@
+{
+  "name": "sofamate",
+  "productName": "SofaMate",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "powershell -NoProfile -File experiments/tauri-client/build.ps1",
+    "dev": "npm run build && npm start",
+    "start": "node scripts/start-client.mjs",
+    "authoring": "tsx src/authoring/cli.ts",
+    "market": "tsx scripts/market.ts",
+    "build:market": "node scripts/build-market.mjs",
+    "package:public": "node scripts/package-client.mjs --public",
+    "test:market": "tsx --test tests/market.test.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "fixtures": "tsx scripts/make-fixtures.ts",
+    "author": "tsx src/authoring/cli.ts",
+    "package:dir": "node scripts/package-client.mjs",
+    "typecheck:client": "tsc --noEmit -p experiments/tauri-client/tsconfig.json",
+    "format": "prettier --write src scripts tests package.json tsconfig.json"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/node": "26.5.1",
+    "esbuild": "0.28.2",
+    "prettier": "3.9.6",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2",
+    "vite": "8.3.0"
+  }
+}

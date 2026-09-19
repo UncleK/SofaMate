@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0",
+  "assets": [
+    {
+      "id": "TEST_ACTOR",
+      "label": "第二包成人男性身份测试占位",
+      "path": "production/stills/TEST_ACTOR/v001/master.png",
+      "status": "planned",
+      "sha256": null,
+      "parents": [],
+      "prompt": "prompts/image/TEST_ACTOR.md",
+      "optional": false
+    },
+    {
+      "id": "TEST_STAGE",
+      "label": "雨窗书桌布景测试占位",
+      "path": "production/stills/TEST_STAGE/v001/master.png",
+      "status": "planned",
+      "sha256": null,
+      "parents": [],
+      "prompt": "prompts/image/TEST_STAGE.md",
+      "optional": false
+    },
+    {
+      "id": "DESIGN_DESK",
+      "label": "书桌停靠目标",
+      "path": "production/stills/DESIGN_DESK/v001/master.png",
+      "status": "planned",
+      "sha256": null,
+      "parents": [],
+      "prompt": "prompts/image/DESIGN_DESK.md",
+      "optional": false
+    },
+    {
+      "id": "DESIGN_WINDOW",
+      "label": "窗边停靠目标",
+      "path": "production/stills/DESIGN_WINDOW/v001/master.png",
+      "status": "planned",
+      "sha256": null,
+      "parents": [],
+      "prompt": "prompts/image/DESIGN_WINDOW.md",
+      "optional": false
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.0",
+  "joins": [
+    {
+      "incomingEdgeId": "quiet_read",
+      "outgoingEdgeId": "quiet_read",
+      "nodeId": "desk_read",
+      "status": "pending",
+      "method": null,
+      "evidence": null
+    },
+    {
+      "incomingEdgeId": "quiet_read",
+      "outgoingEdgeId": "look_out",
+      "nodeId": "desk_read",
+      "status": "pending",
+      "method": null,
+      "evidence": null
+    },
+    {
+      "incomingEdgeId": "return_desk",
+      "outgoingEdgeId": "quiet_read",
+      "nodeId": "desk_read",
+      "status": "pending",
+      "method": null,
+      "evidence": null
+    },
+    {
+      "incomingEdgeId": "return_desk",
+      "outgoingEdgeId": "look_out",
+      "nodeId": "desk_read",
+      "status": "pending",
+      "method": null,
+      "evidence": null
+    },
+    {
+      "incomingEdgeId": "look_out",
+      "outgoingEdgeId": "return_desk",
+      "nodeId": "window_pause",
+      "status": "pending",
+      "method": null,
+      "evidence": null
+    },
+    {
+      "incomingEdgeId": "__entry__",
+      "outgoingEdgeId": "quiet_read",
+      "nodeId": "desk_read",
+      "status": "pending",
+      "method": null,
+      "evidence": null
+    },
+    {
+      "incomingEdgeId": "__entry__",
+      "outgoingEdgeId": "look_out",
+      "nodeId": "desk_read",
+      "status": "pending",
+      "method": null,
+      "evidence": null
+    }
+  ]
+}

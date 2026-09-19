@@ -1,0 +1,205 @@
+{
+  "entryNode": "P0",
+  "nodes": [
+    {
+      "id": "P0",
+      "label": "平静坐着看屏幕",
+      "snapshot": {
+        "pose": "neutral_seated",
+        "remote": "side_table_rear",
+        "bowl": "side_table_center",
+        "cloth": "side_table_front_folded",
+        "hands": "empty_on_thighs",
+        "mouth": "closed_not_chewing",
+        "glass": "clean"
+      }
+    },
+    {
+      "id": "P1",
+      "label": "放松斜靠",
+      "snapshot": {
+        "pose": "relaxed_lean",
+        "remote": "side_table_rear",
+        "bowl": "side_table_center",
+        "cloth": "side_table_front_folded",
+        "hands": "empty_resting",
+        "mouth": "closed_not_chewing",
+        "glass": "clean"
+      }
+    },
+    {
+      "id": "P2",
+      "label": "双手空，前倾观察",
+      "snapshot": {
+        "pose": "forward_seated",
+        "remote": "side_table_rear",
+        "bowl": "side_table_center",
+        "cloth": "side_table_front_folded",
+        "hands": "empty_on_knees",
+        "mouth": "closed_not_chewing",
+        "glass": "clean"
+      }
+    },
+    {
+      "id": "P3",
+      "label": "手持遥控器",
+      "snapshot": {
+        "pose": "seated_with_remote",
+        "remote": "actor_right_hand",
+        "bowl": "side_table_center",
+        "cloth": "side_table_front_folded",
+        "hands": "right_remote_left_thigh",
+        "mouth": "closed_not_chewing",
+        "glass": "clean"
+      }
+    },
+    {
+      "id": "P4",
+      "label": "抱零食碗，已咽下且双手稳定",
+      "snapshot": {
+        "pose": "seated_with_bowl",
+        "remote": "side_table_rear",
+        "bowl": "actor_left_hand_on_lap",
+        "cloth": "side_table_front_folded",
+        "hands": "left_supports_bowl_right_empty_on_knee",
+        "mouth": "closed_not_chewing",
+        "glass": "clean"
+      }
+    },
+    {
+      "id": "P5",
+      "label": "擦屏后近景，右手持擦布并放低",
+      "snapshot": {
+        "pose": "near_glass",
+        "remote": "side_table_rear",
+        "bowl": "side_table_center",
+        "cloth": "actor_right_hand_lowered",
+        "hands": "right_cloth_left_relaxed",
+        "mouth": "closed_not_chewing",
+        "glass": "clean"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "E00",
+      "fromNode": "P0",
+      "toNode": "P0",
+      "tag": "ambient",
+      "weight": 8,
+      "cooldownSec": 0
+    },
+    {
+      "id": "E01",
+      "fromNode": "P0",
+      "toNode": "P1",
+      "tag": "transition",
+      "weight": 2,
+      "cooldownSec": 0
+    },
+    {
+      "id": "E02",
+      "fromNode": "P1",
+      "toNode": "P0",
+      "tag": "return",
+      "weight": 4,
+      "cooldownSec": 0
+    },
+    {
+      "id": "E03",
+      "fromNode": "P0",
+      "toNode": "P2",
+      "tag": "transition",
+      "weight": 2,
+      "cooldownSec": 0
+    },
+    {
+      "id": "E04",
+      "fromNode": "P2",
+      "toNode": "P0",
+      "tag": "return",
+      "weight": 5,
+      "cooldownSec": 0
+    },
+    {
+      "id": "E05",
+      "fromNode": "P0",
+      "toNode": "P3",
+      "tag": "transition",
+      "weight": 2,
+      "cooldownSec": 0
+    },
+    {
+      "id": "E06",
+      "fromNode": "P3",
+      "toNode": "P0",
+      "tag": "return",
+      "weight": 4,
+      "cooldownSec": 0
+    },
+    {
+      "id": "E07",
+      "fromNode": "P3",
+      "toNode": "P2",
+      "tag": "transition",
+      "weight": 2,
+      "cooldownSec": 0
+    },
+    {
+      "id": "E08",
+      "fromNode": "P0",
+      "toNode": "P4",
+      "tag": "transition",
+      "weight": 2,
+      "cooldownSec": 0
+    },
+    {
+      "id": "E09",
+      "fromNode": "P4",
+      "toNode": "P4",
+      "tag": "snack",
+      "weight": 4,
+      "cooldownSec": 45
+    },
+    {
+      "id": "E10",
+      "fromNode": "P4",
+      "toNode": "P0",
+      "tag": "return",
+      "weight": 4,
+      "cooldownSec": 0
+    },
+    {
+      "id": "E11",
+      "fromNode": "P4",
+      "toNode": "P2",
+      "tag": "transition",
+      "weight": 2,
+      "cooldownSec": 0
+    },
+    {
+      "id": "E12",
+      "fromNode": "P2",
+      "toNode": "P5",
+      "tag": "hero",
+      "weight": 1,
+      "cooldownSec": 300
+    },
+    {
+      "id": "E13",
+      "fromNode": "P5",
+      "toNode": "P0",
+      "tag": "return",
+      "weight": 1,
+      "cooldownSec": 0
+    },
+    {
+      "id": "E14",
+      "fromNode": "P1",
+      "toNode": "P1",
+      "tag": "ambient",
+      "weight": 3,
+      "cooldownSec": 0
+    }
+  ]
+}

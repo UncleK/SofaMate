@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "SofaMate",
+  "version": "0.1.0",
+  "identifier": "com.screenmate.desktop",
+  "build": { "beforeBuildCommand": "npm run frontend", "frontendDist": "../dist" },
+  "app": {
+    "windows": [],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' http://scene.localhost http://127.0.0.1:47831 https://sofamate.aveniqa.com blob:; media-src http://scene.localhost; connect-src ipc: http://ipc.localhost; object-src 'none'; base-uri 'none'; frame-src 'none'"
+    }
+  },
+  "bundle": { "active": false, "icon": ["../../../assets/brand/native/screenmate.ico"] }
+}
