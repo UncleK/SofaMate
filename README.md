@@ -1,8 +1,8 @@
-<p align="center"><img src="site/assets/readme-hero.svg" alt="SofaMate — A little company, every day." width="100%"></p>
+<p align="center"><img src="site/assets/social-card.png" alt="SofaMate — A little company, every day." width="100%"></p>
 
 <p align="center"><b>A familiar face. A little company.</b><br>Keep your favorite characters on your Windows desktop, through work, study and time on your own.</p>
 
-<p align="center"><a href="https://sofamate.aveniqa.com">Website</a> · <a href="https://github.com/UncleK/SofaMate/releases/latest">Download for Windows</a> · <a href="https://sofamate.aveniqa.com/market">Community</a> · <a href="README.zh-CN.md">简体中文</a></p>
+<p align="center"><a href="https://sofamate.aveniqa.com">Website</a> · <a href="https://github.com/UncleK/SofaMate/releases/latest">Download for Windows</a> · <a href="https://sofamate.aveniqa.com/market">Community</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.ja.md">日本語</a></p>
 
 <p align="center"><img alt="Windows 10 and 11" src="https://img.shields.io/badge/Windows-10%20%2F%2011-302c27?style=flat-square&labelColor=242320"> <img alt="Tauri and WebView2" src="https://img.shields.io/badge/Tauri-WebView2-cdb391?style=flat-square&labelColor=242320"> <img alt="Public beta" src="https://img.shields.io/badge/status-public%20beta-cdb391?style=flat-square&labelColor=242320"></p>
 

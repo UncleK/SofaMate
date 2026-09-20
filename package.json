@@ -11,6 +11,7 @@
     "authoring": "tsx src/authoring/cli.ts",
     "market": "tsx scripts/market.ts",
     "build:market": "node scripts/build-market.mjs",
+    "build:site": "node scripts/build-site.mjs",
     "package:public": "node scripts/package-client.mjs --public",
     "test:market": "tsx --test tests/market.test.ts",
     "typecheck": "tsc --noEmit",

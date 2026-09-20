@@ -1,8 +1,8 @@
-<p align="center"><img src="site/assets/readme-hero.svg" alt="SofaMate" width="100%"></p>
+<p align="center"><img src="site/assets/social-card.png" alt="SofaMate" width="100%"></p>
 
 <p align="center"><b>SofaMate · 沙发伴侣</b><br>打开桌面，就有陪伴。把喜欢的角色留在 Windows 桌面，陪你工作、学习和独处的时光。</p>
 
-<p align="center"><a href="https://sofamate.aveniqa.com">官网</a> · <a href="https://github.com/UncleK/SofaMate/releases/latest">下载</a> · <a href="https://sofamate.aveniqa.com/market">分享市场</a> · <a href="README.md">English</a></p>
+<p align="center"><a href="https://sofamate.aveniqa.com">官网</a> · <a href="https://github.com/UncleK/SofaMate/releases/latest">下载</a> · <a href="https://sofamate.aveniqa.com/market">分享市场</a> · <a href="README.md">English</a> · <a href="README.ja.md">日本語</a></p>
 
 ![精选主题的真实 Windows 客户端截图](site/assets/client-featured.png)
 
