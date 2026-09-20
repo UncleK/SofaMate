@@ -1,14 +1,16 @@
 <p align="center"><img src="site/assets/readme-hero.svg" alt="SofaMate" width="100%"></p>
 
-<p align="center"><b>让桌面，慢下来。</b><br>轻巧的 Windows 视频壁纸客户端。导入、预览、收藏，分享属于你的日常。</p>
+<p align="center"><b>打开桌面，就有陪伴。</b><br>把喜欢的角色留在 Windows 桌面，陪你工作、学习和独处的时光。</p>
 
 <p align="center"><a href="https://sofamate.aveniqa.com">官网</a> · <a href="https://github.com/UncleK/SofaMate/releases/latest">下载</a> · <a href="https://sofamate.aveniqa.com/market">分享市场</a> · <a href="README.md">English</a></p>
 
 ![精选主题的真实 Windows 客户端截图](site/assets/client-featured.png)
 
-## 刚刚好的陪伴
+## 你喜欢的桌面陪伴
 
-导入喜欢的 MP4，客户端自动生成九宫格预览。点击「设为壁纸」，画面便留在桌面图标后方。本机视频与已安装主题统一收在「我的壁纸」，支持搜索和左右切换。
+喜欢她的温柔，也可以喜欢他的笑容。把让你心动的人物视频留在桌面，一个人工作、学习，或只是待着时，也有一份陪伴的感觉。
+
+导入喜欢的 MP4，客户端自动生成九宫格预览。点击「设为壁纸」，人物画面便留在桌面图标后方。本机视频与已安装主题统一收在「我的壁纸」，支持搜索和左右切换。
 
 | 本机使用 | 播放控制 | 分享社区 |
 | --- | --- | --- |

@@ -1,16 +1,18 @@
-<p align="center"><img src="site/assets/readme-hero.svg" alt="SofaMate — A little room for everyday life." width="100%"></p>
+<p align="center"><img src="site/assets/readme-hero.svg" alt="SofaMate — A little company, every day." width="100%"></p>
 
-<p align="center"><b>A quiet home for your favorite moving moments.</b><br>Lightweight video wallpapers for Windows. Import, preview, keep, and share.</p>
+<p align="center"><b>A familiar face. A little company.</b><br>Keep your favorite characters on your Windows desktop, through work, study and time on your own.</p>
 
 <p align="center"><a href="https://sofamate.aveniqa.com">Website</a> · <a href="https://github.com/UncleK/SofaMate/releases/latest">Download for Windows</a> · <a href="https://sofamate.aveniqa.com/market">Community</a> · <a href="README.zh-CN.md">简体中文</a></p>
 
 <p align="center"><img alt="Windows 10 and 11" src="https://img.shields.io/badge/Windows-10%20%2F%2011-302c27?style=flat-square&labelColor=242320"> <img alt="Tauri and WebView2" src="https://img.shields.io/badge/Tauri-WebView2-cdb391?style=flat-square&labelColor=242320"> <img alt="Public beta" src="https://img.shields.io/badge/status-public%20beta-cdb391?style=flat-square&labelColor=242320"></p>
 
-## Make yourself at home
+## Your kind of company
 
 ![SofaMate featured scene — real Windows client](site/assets/client-featured.png)
 
-Bring an MP4 into SofaMate and make it your wallpaper. A nine-frame preview helps you see the whole mood before you press play. The soft dark interface stays out of the way; the wallpaper lives behind your desktop icons.
+A familiar smile, a favorite character, a face you are happy to see. SofaMate turns character videos into desktop wallpapers, bringing a sense of company to work, study and time on your own. Choose the companion you like.
+
+Import an MP4, browse its nine-frame preview and set it behind your desktop icons. Your collection stays local, ready whenever you want a little company.
 
 | Your collection | Your controls | Your community |
 | --- | --- | --- |
@@ -21,7 +23,7 @@ Bring an MP4 into SofaMate and make it your wallpaper. A nine-frame preview help
 ## Small by design
 
 - **Tauri + system WebView2.** No bundled Chromium, Node.js, or FFmpeg in the desktop download.
-- **Quiet on startup.** Audio starts muted. Stopping destroys the desktop player; closing the panel keeps the wallpaper running.
+- **Muted on startup.** Audio starts muted. Stopping destroys the desktop player; closing the panel keeps the wallpaper running.
 - **Local first.** Import and playback work without an account. Previews are generated on your computer.
 - **Familiar sign-in.** Email codes, GitHub, and Google use your system browser. Windows protects the desktop session with DPAPI.
 - **Three languages.** 简体中文 · English · 日本語.
@@ -65,4 +67,4 @@ SofaMate is in public beta. Multi-monitor playback, automatic video conversion, 
 
 Questions and reproducible bugs are welcome in [Issues](https://github.com/UncleK/SofaMate/issues). Please keep private email addresses, tokens and local filesystem paths out of public reports. See [third-party notices](THIRD_PARTY_NOTICES.md). A license for SofaMate source and demo artwork has not yet been designated.
 
-<p align="center"><sub>Made for quieter desktops. Give your day a little room.</sub></p>
+<p align="center"><sub>Your favorite characters. A little company, every day.</sub></p>

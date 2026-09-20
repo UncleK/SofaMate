@@ -1,6 +1,7 @@
 const $ = id => document.getElementById(id);
 async function api(path, body) {
   const response = await fetch(path, { method: body === undefined ? 'GET' : 'POST', credentials: 'same-origin', headers: body === undefined ? {} : { 'Content-Type': 'application/json' }, body: body === undefined ? undefined : JSON.stringify(body), redirect: 'error' });
+  if (!response.headers.get('content-type')?.includes('application/json')) throw new Error(response.status === 429 ? '操作太频繁，请稍后再试。' : '服务暂时不可用，请稍后重试。');
   const value = await response.json();
   if (!response.ok) throw new Error(value.error || '暂时无法连接，请稍后重试。');
   return value;
@@ -13,13 +14,13 @@ if ($('email-form')) {
   const run = async fn => { try { await fn(); } catch (error) { status(error.message, true); } };
   function updateResend() { const seconds = Math.max(0, Math.ceil((resendAt - Date.now()) / 1000)); $('resend-code').disabled = seconds > 0; $('resend-code').textContent = seconds ? `${seconds} 秒后重新发送` : '重新发送'; }
   async function send() {
-    $('send-code').disabled = true; status('正在发送验证码…');
+    $('send-code').disabled = true; $('change-email').disabled = true; status('正在发送验证码…');
     try {
       const result = await api('/v1/auth/email/start', { email: $('email').value, name: $('name').value });
       challengeId = result.challengeId; resendAt = Date.now() + result.retryAfter * 1000;
       $('email-form').hidden = true; $('code-form').hidden = false; $('code').focus(); updateResend();
       status('验证码已发送，请查看邮箱。10 分钟内有效。');
-    } finally { $('send-code').disabled = false; }
+    } finally { $('send-code').disabled = false; $('change-email').disabled = false; }
   }
   async function showUser(user) {
     $('sign-in').hidden = true; $('signed-in').hidden = false;
@@ -32,11 +33,15 @@ if ($('email-form')) {
   }
   $('email-form').addEventListener('submit', event => { event.preventDefault(); void run(send); });
   $('resend-code').onclick = () => void run(send);
+  $('change-email').onclick = () => {
+    challengeId = ''; $('code').value = ''; $('code-form').hidden = true;
+    $('email-form').hidden = false; status(''); $('email').focus();
+  };
   setInterval(updateResend, 1000);
   $('code-form').addEventListener('submit', event => { event.preventDefault(); void run(async () => {
-    const button = $('code-form').querySelector('button'); button.disabled = true;
+    const button = $('code-form').querySelector('button'); button.disabled = true; $('change-email').disabled = true;
     try { const result = await api('/v1/auth/email/verify', { challengeId, code: $('code').value }); await showUser(result.user); }
-    finally { button.disabled = false; }
+    finally { button.disabled = false; $('change-email').disabled = false; }
   }); });
   $('approve-desktop').onclick = () => void run(async () => {
     $('approve-desktop').disabled = true;
@@ -78,10 +83,16 @@ if ($('market-grid')) {
       if (!more) $('market-grid').replaceChildren();
       data.items.forEach(item => $('market-grid').append(card(item))); next = data.nextOffset;
       $('market-more').hidden = next === null; $('market-empty').hidden = data.total > 0;
+      const searching = !!$('market-query').value.trim();
+      $('market-empty').querySelector('h2').textContent = searching ? '没有找到匹配的壁纸。' : '你喜欢的角色，等你来分享。';
+      $('market-empty').querySelector('p').textContent = searching ? '试试其他名字，或清空搜索看看全部作品。' : '在 SofaMate 中导入你创作的视频，登录后点击「分享」。你的作品会出现在这里。';
+      $('market-empty').querySelector('a').hidden = searching;
+      $('market-reset').hidden = !searching;
       $('market-status').textContent = data.total ? `${data.total} 段画面，等你带回桌面。` : '';
     } catch (error) { if (run === generation) $('market-status').textContent = error.message; }
   }
   $('market-search').onsubmit = event => { event.preventDefault(); void load(); };
   $('market-more').onclick = () => void load(true);
+  $('market-reset').onclick = () => { $('market-query').value = ''; void load(); };
   void load();
 }

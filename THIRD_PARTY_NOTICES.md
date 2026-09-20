@@ -11,3 +11,7 @@ SofaMate uses the projects below. Their authors retain their respective rights a
 | [Microsoft Edge WebView2](https://developer.microsoft.com/microsoft-edge/webview2/) | System-provided renderer | Microsoft terms; runtime not bundled |
 
 Dependency versions are recorded in `Cargo.lock` and `package-lock.json`; collected copyright and license texts are in `THIRD_PARTY_LICENSES.txt`. Development tools and the Node.js market server are not included in the desktop ZIP. This notice does not assign a license to SofaMate source or demonstration artwork.
+
+## Website identity marks
+
+The GitHub Invertocat is an unmodified official asset from [GitHub Brand Toolkit](https://brand.github.com/foundations/logo). The Google G is an unmodified official asset from [Google Identity](https://developers.google.com/identity/branding-guidelines). These marks identify the corresponding sign-in integrations and remain the property of their respective owners.
