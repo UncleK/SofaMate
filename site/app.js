@@ -6,59 +6,25 @@ async function api(path, body) {
   if (!response.ok) throw new Error(value.error || '暂时无法连接，请稍后重试。');
   return value;
 }
-if ($('email-form')) {
-  let challengeId = '', resendAt = 0;
-  const desktop = new URLSearchParams(location.search).get('desktop');
-  const validDesktop = desktop && /^[a-f0-9]{64}$/.test(desktop) ? desktop : '';
-  const status = (text, error = false) => { $('auth-status').textContent = text; $('auth-status').classList.toggle('error', error); };
-  const run = async fn => { try { await fn(); } catch (error) { status(error.message, true); } };
-  function updateResend() { const seconds = Math.max(0, Math.ceil((resendAt - Date.now()) / 1000)); $('resend-code').disabled = seconds > 0; $('resend-code').textContent = seconds ? `${seconds} 秒后重新发送` : '重新发送'; }
-  async function send() {
-    $('send-code').disabled = true; $('change-email').disabled = true; status('正在发送验证码…');
-    try {
-      const result = await api('/v1/auth/email/start', { email: $('email').value, name: $('name').value });
-      challengeId = result.challengeId; resendAt = Date.now() + result.retryAfter * 1000;
-      $('email-form').hidden = true; $('code-form').hidden = false; $('code').focus(); updateResend();
-      status('验证码已发送，请查看邮箱。10 分钟内有效。');
-    } finally { $('send-code').disabled = false; $('change-email').disabled = false; }
-  }
-  async function showUser(user) {
-    $('sign-in').hidden = true; $('signed-in').hidden = false;
-    $('auth-title').textContent = '很高兴，再见到你。'; $('user-name').textContent = user.name; $('user-email').textContent = user.email;
-    status('');
-    if (validDesktop) {
-      const pair = await api('/v1/auth/desktop/info?id=' + validDesktop);
-      $('pairing').hidden = false; $('pair-code').textContent = pair.code; $('account-actions').hidden = true;
-    }
-  }
-  $('email-form').addEventListener('submit', event => { event.preventDefault(); void run(send); });
-  $('resend-code').onclick = () => void run(send);
-  $('change-email').onclick = () => {
-    challengeId = ''; $('code').value = ''; $('code-form').hidden = true;
-    $('email-form').hidden = false; status(''); $('email').focus();
-  };
-  setInterval(updateResend, 1000);
-  $('code-form').addEventListener('submit', event => { event.preventDefault(); void run(async () => {
-    const button = $('code-form').querySelector('button'); button.disabled = true; $('change-email').disabled = true;
-    try { const result = await api('/v1/auth/email/verify', { challengeId, code: $('code').value }); await showUser(result.user); }
-    finally { button.disabled = false; $('change-email').disabled = false; }
-  }); });
+if ($('unified-sign-in')) {
+  const id = new URLSearchParams(location.search).get('desktop');
+  const desktop = id && /^[a-f0-9]{64}$/.test(id) ? id : '';
+  if (desktop) $('unified-login').href += '?desktop=' + desktop;
+  const status = text => { $('auth-status').textContent = text; };
+  const run = async fn => { try { await fn(); } catch(error) { status(error.message); } };
   $('approve-desktop').onclick = () => void run(async () => {
     $('approve-desktop').disabled = true;
-    try { await api('/v1/auth/desktop/approve', { id: validDesktop }); $('pairing').hidden = true; status('已连接。可以返回 SofaMate 客户端了。'); }
-    finally { $('approve-desktop').disabled = false; }
+    try { await api('/v1/auth/desktop/approve', {id:desktop}); $('pairing').hidden=true; status('已连接。可以返回 SofaMate 客户端了。'); }
+    finally { $('approve-desktop').disabled=false; }
   });
   $('sign-out').onclick = () => void run(async () => { await api('/v1/auth/logout', {}); location.reload(); });
   void run(async () => {
     const config = await api('/v1/auth/config');
-    for (const provider of ['github', 'google']) {
-      const button = $(provider + '-login'), link = $('link-' + provider);
-      if (!config[provider]) { button.removeAttribute('href'); button.setAttribute('aria-disabled', 'true'); button.style.opacity = '.45'; button.title = '正在配置，暂未开放'; link.hidden = true; }
-      else if (validDesktop) button.href += '?desktop=' + validDesktop;
-    }
-    if (!config.email) { $('send-code').disabled = true; status('邮箱服务正在配置，请使用其他登录方式。'); }
-    try { await showUser((await api('/v1/auth/me')).user); }
-    catch { if (new URLSearchParams(location.search).get('error') === 'link-required') status('此邮箱已有账号。请先用邮箱验证码登录，再选择绑定第三方账号。'); }
+    if (!config.unified) { $('unified-login').removeAttribute('href'); $('unified-login').setAttribute('aria-disabled','true'); status('统一登录正在配置，请稍后重试。'); return; }
+    let user; try { user=(await api('/v1/auth/me')).user; } catch { return; }
+    $('unified-sign-in').hidden=true; $('signed-in').hidden=false;
+    $('auth-title').textContent='很高兴，再见到你。'; $('user-name').textContent=user.name; $('user-email').textContent=user.email;
+    if (desktop) { const pair=await api('/v1/auth/desktop/info?id='+desktop); $('pairing').hidden=false; $('pair-code').textContent=pair.code; $('account-actions').hidden=true; }
   });
 }
 if ($('market-grid')) {
@@ -95,4 +61,28 @@ if ($('market-grid')) {
   $('market-more').onclick = () => void load(true);
   $('market-reset').onclick = () => { $('market-query').value = ''; void load(); };
   void load();
+}
+
+if ($('download-dialog')) {
+  const dialog=$('download-dialog'), preview=$('preview-dialog'), video=$('gallery-video');
+  const openDownload=(title='',url='')=>{ $('download-context').textContent=title?'你选择了「'+title+'」。下载客户端，把这份陪伴带回桌面。':'下载 SofaMate · 沙发伴侣，开始你的桌面陪伴。'; $('selected-scene').hidden=!url; if(url) $('selected-download').href=url; else $('selected-download').removeAttribute('href'); $('spotlight-video')?.pause(); dialog.showModal(); };
+  document.addEventListener('click',event=>{
+    const item=event.target.closest('[data-companion]'); if(item){ openDownload(item.dataset.companion,item.dataset.video); return; }
+    const play=event.target.closest('[data-preview]'); if(play){ $('spotlight-video')?.pause(); video.src=play.dataset.preview; preview.showModal(); video.play().catch(()=>{}); return; }
+    const download=event.target.closest('a[href*="/releases/latest/download/"]'); if(download && !dialog.contains(download)){ event.preventDefault(); openDownload(); }
+  });
+  for(const modal of [dialog,preview]){ modal.querySelector('[data-close-dialog]').onclick=()=>modal.close(); modal.addEventListener('click',event=>{if(event.target===modal){const rect=modal.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)modal.close();}}); }
+  preview.addEventListener('close',()=>{ video.pause();video.removeAttribute('src');video.load(); });
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){video.pause();$('spotlight-video')?.pause();}});
+  void (async()=>{try{
+    const result=await api('/v1/items?offset=0');
+    for(const item of result.items.slice(0,8)){
+      const card=document.createElement('article');card.className='companion-card';
+      const cover=document.createElement('button');cover.className='companion-cover';cover.dataset.preview='/v1/items/'+item.id+'/video';cover.setAttribute('aria-label','预览'+item.title);
+      const image=document.createElement('img');image.src='/v1/items/'+item.id+'/cover';image.alt=item.title;image.loading='lazy';image.width=1280;image.height=720;
+      const play=document.createElement('span');play.textContent='▶ 预览视频';cover.append(image,play);
+      const info=document.createElement('div');info.className='companion-info';const text=document.createElement('div');const tag=document.createElement('span');tag.className='scene-label';tag.textContent='社区 · '+item.author;const title=document.createElement('h3');title.textContent=item.title;text.append(tag,title);
+      const button=document.createElement('button');button.className='button primary';button.textContent='立即陪伴 ↗';button.dataset.companion=item.title;button.dataset.video='/v1/items/'+item.id+'/video';info.append(text,button);card.append(cover,info);$('companion-gallery').insertBefore(card,$('companion-gallery').lastElementChild);
+    }
+  }catch{ $('gallery-status').textContent='社区作品暂时无法加载，你仍可以预览官方片段。'; }})();
 }

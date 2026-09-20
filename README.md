@@ -25,7 +25,7 @@ Import an MP4, browse its nine-frame preview and set it behind your desktop icon
 - **Tauri + system WebView2.** No bundled Chromium, Node.js, or FFmpeg in the desktop download.
 - **Muted on startup.** Audio starts muted. Stopping destroys the desktop player; closing the panel keeps the wallpaper running.
 - **Local first.** Import and playback work without an account. Previews are generated on your computer.
-- **Familiar sign-in.** Email codes, GitHub, and Google use your system browser. Windows protects the desktop session with DPAPI.
+- **One Aveniqa account.** Email codes, GitHub, and Google use the shared account center in your system browser. Windows protects the desktop session with DPAPI.
 - **Three languages.** 简体中文 · English · 日本語.
 
 <p align="center"><img src="site/assets/sharing-flow.svg" alt="Local video, nine-frame preview, optional community sharing" width="680"></p>

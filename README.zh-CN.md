@@ -1,6 +1,6 @@
 <p align="center"><img src="site/assets/readme-hero.svg" alt="SofaMate" width="100%"></p>
 
-<p align="center"><b>打开桌面，就有陪伴。</b><br>把喜欢的角色留在 Windows 桌面，陪你工作、学习和独处的时光。</p>
+<p align="center"><b>SofaMate · 沙发伴侣</b><br>打开桌面，就有陪伴。把喜欢的角色留在 Windows 桌面，陪你工作、学习和独处的时光。</p>
 
 <p align="center"><a href="https://sofamate.aveniqa.com">官网</a> · <a href="https://github.com/UncleK/SofaMate/releases/latest">下载</a> · <a href="https://sofamate.aveniqa.com/market">分享市场</a> · <a href="README.md">English</a></p>
 
@@ -15,12 +15,14 @@
 | 本机使用 | 播放控制 | 分享社区 |
 | --- | --- | --- |
 | 无需账号，导入后离线播放 | 面板预览与桌面播放独立 | 注册登录后发布，所有人可浏览、下载 |
-| 九宫格在本机生成 | 暂停、继续、停止、音量集中在小菜单 | 邮箱验证码、GitHub、Google 登录 |
+| 九宫格在本机生成 | 暂停、继续、停止、音量集中在小菜单 | Aveniqa 统一账号：邮箱验证码、GitHub、Google |
 | 简体中文、英文、日文 | 启动默认静音，停止释放桌面播放器 | 下载到本机后，可离线使用 |
 
 ![我的壁纸](site/assets/client-library.png)
 
 ## 开始使用
+
+也可以先在[官网陪伴展厅](https://sofamate.aveniqa.com/#companions)观看真实视频、查看九宫格，选择喜欢的作品后点击「立即陪伴」，再下载客户端与视频。
 
 1. [下载 Windows ZIP](https://github.com/UncleK/SofaMate/releases/latest/download/SofaMate-Windows-x64.zip)，解压。
 2. 双击 `SofaMate.exe`，点击「导入视频」。

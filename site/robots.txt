@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /v1/auth/
+Disallow: /v1/admin/
+
+Sitemap: https://sofamate.aveniqa.com/sitemap.xml

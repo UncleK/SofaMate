@@ -9,6 +9,7 @@ const server = await createMarket(
     maxTotalBytes: Number(process.env.SOFAMATE_MAX_STORAGE_BYTES ?? 10 * 1024 ** 3),
     maxOwnerBytes: Number(process.env.SOFAMATE_MAX_USER_BYTES ?? 2 * 1024 ** 3),
     auth: {
+      oidc: process.env.SOFAMATE_OIDC_ISSUER && process.env.SOFAMATE_OIDC_CLIENT_ID && process.env.SOFAMATE_OIDC_CLIENT_SECRET ? { issuer: process.env.SOFAMATE_OIDC_ISSUER, clientId: process.env.SOFAMATE_OIDC_CLIENT_ID, clientSecret: process.env.SOFAMATE_OIDC_CLIENT_SECRET } : undefined,
       resendKey: process.env.SOFAMATE_RESEND_API_KEY,
       emailFrom: process.env.SOFAMATE_EMAIL_FROM,
       github: process.env.SOFAMATE_GITHUB_CLIENT_ID && process.env.SOFAMATE_GITHUB_CLIENT_SECRET ? { clientId: process.env.SOFAMATE_GITHUB_CLIENT_ID, clientSecret: process.env.SOFAMATE_GITHUB_CLIENT_SECRET } : undefined,

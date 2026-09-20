@@ -22,14 +22,9 @@ The included certificate timer uses a separately pinned official Certbot image, 
 
 ## Authentication
 
-Email sign-in uses single-use six-digit codes (10 minutes, five attempts), delivered with a dedicated domain-restricted Resend sending key. The first successful verification creates the account. Limits include per-address cooldown, per-IP requests and an 80-email rolling daily global budget for the beta.
+Registration and email/Google/GitHub sign-in belong to the shared Aveniqa identity provider. Enable Supabase's OAuth server with dynamic registration disabled, implement the Aveniqa consent page, and register a separate confidential SofaMate client with the exact callback `https://YOUR_HOST/v1/auth/aveniqa/callback`. Aveniqa must allowlist that client ID in `SOFAMATE_OAUTH_CLIENT_ID`.
 
-GitHub and Google use server-side authorization code flows with browser-bound state and PKCE. Register exact redirect URIs:
-
-- `https://YOUR_HOST/v1/auth/oauth/github/callback`
-- `https://YOUR_HOST/v1/auth/oauth/google/callback`
-
-Only verified provider emails are accepted. A matching email does not silently merge accounts: sign in with email first, then explicitly link the provider. Provider access tokens are not persisted. Configure a provider only after both its client ID and secret are ready; unavailable options stay disabled.
+Configure all three `SOFAMATE_OIDC_*` variables in the SofaMate server environment. Keep the client secret isolated from business databases and out of the desktop. Requests use browser-bound state, PKCE and a nonce; ID tokens are verified against the provider's signing keys. Provider tokens are not persisted. Independent email/provider routes are disabled in unified mode. See [account architecture](../docs/ACCOUNT_ARCHITECTURE.md).
 
 Web sessions are HttpOnly, Secure, SameSite cookies. Desktop authorization uses a short-lived pairing code and an explicit browser confirmation. Its polling secret stays in native code; the returned session is encrypted using Windows DPAPI. Renderer code never receives the session token. Accounts and hashed session records live in SQLite, outside the source/release tree.
 
@@ -42,3 +37,11 @@ Uploads require an account; browsing and downloads are public. Owners can withdr
 Back up the SQLite database with SQLite's backup API and retain the `items/` directory together. Database files contain private email addresses; backup access must be restricted. For a consistent complete backup, stop **only** SofaMate briefly, copy its data, then restart it. Store an encrypted off-host backup before relying on this beta for irreplaceable media. A release rollback changes the `current` symlink; do not overwrite user data during rollback.
 
 Access logs omit query strings so OAuth codes and pairing identifiers are not logged. Do not enable verbose auth logging. Logs and user data require an operator-defined retention policy.
+
+## Website discovery and official preview
+
+The homepage displays the official scene and up to eight actual community works from the same `/v1/items` catalog as the client. Preview starts on request; closing it unloads the media. The download dialog retains the selected video and offers the Windows client plus a video download/import path. It does not claim automatic installation of a complete official theme.
+
+Keep the approved preview outside Git and release directories at `/srv/sofamate/public-media/night-scene.mp4`, readable by Nginx. The exact `/previews/night-scene.mp4` location supports range requests and limits transfer rate. Preview SHA-256: `5bbe59249b7c016a01e5a1031992b311a58065171396d55afd689d9d912f5f1f`; 4,221,029 bytes. It is one approved 720P24 clip, not a full scene graph. Reuse this media directory on later deployments.
+
+Public pages include canonical URLs, Open Graph/Twitter cards and accurate software/FAQ structured data. `robots.txt` and `sitemap.xml` cover public pages; login is noindex. Keep schema text and visible FAQ answers synchronized. No fabricated reviews, user counts or search/AI ranking guarantees are used.

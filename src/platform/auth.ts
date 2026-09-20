@@ -3,11 +3,13 @@ import { randomBytes, randomInt, randomUUID } from 'node:crypto';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import path from 'node:path';
 import { digest, matches, MarketError } from './market-access';
+import { verifyIdentityToken, type OidcConfig } from './oidc';
 
 type Provider = 'github' | 'google';
 type User = { id: string; email: string; name: string; disabled: number };
 type Credentials = { clientId: string; clientSecret: string };
 export type AuthOptions = {
+  oidc?: OidcConfig;
   github?: Credentials;
   google?: Credentials;
   resendKey?: string;
@@ -40,7 +42,9 @@ export function createAuth(root: string, origin: string, options: AuthOptions = 
     CREATE TABLE IF NOT EXISTS oauth_states(hash TEXT PRIMARY KEY,provider TEXT NOT NULL,verifier TEXT NOT NULL,desktop TEXT NOT NULL,link_user TEXT,expires INTEGER NOT NULL);
     CREATE TABLE IF NOT EXISTS desktop_logins(id TEXT PRIMARY KEY,secret_hash TEXT NOT NULL,display_code TEXT NOT NULL,user_id TEXT REFERENCES users(id),expires INTEGER NOT NULL);
     CREATE TABLE IF NOT EXISTS rate_limits(key TEXT PRIMARY KEY,hits INTEGER NOT NULL,until INTEGER NOT NULL);
+    CREATE TABLE IF NOT EXISTS oidc_states(hash TEXT PRIMARY KEY,verifier TEXT NOT NULL,nonce TEXT NOT NULL,desktop TEXT NOT NULL,link_user TEXT,expires INTEGER NOT NULL);
   `);
+  if (options.oidc && (!options.oidc.issuer.startsWith('https://') || new URL(options.oidc.issuer).search || options.oidc.issuer.endsWith('/'))) throw new Error('Invalid OIDC issuer');
   const getUser = (id: string) => db.prepare('SELECT * FROM users WHERE id=?').get(id) as User | undefined;
   const profile = (u: User) => ({ id: u.id, name: u.name, email: u.email });
   const bearer = (req: IncomingMessage) => req.headers.authorization?.match(/^Bearer ([a-f0-9]{64})$/)?.[1] ?? cookie(req, '__Host-sofamate');
@@ -92,6 +96,7 @@ export function createAuth(root: string, origin: string, options: AuthOptions = 
     fail(503, '验证码发送失败，请稍后重试');
   }
   function cleanup() {
+    db.prepare('DELETE FROM oidc_states WHERE expires<?').run(now());
     for (const table of ['sessions', 'email_codes', 'oauth_states', 'desktop_logins']) db.prepare(`DELETE FROM ${table} WHERE expires<?`).run(now());
     db.prepare('DELETE FROM rate_limits WHERE until<?').run(now());
   }
@@ -102,13 +107,15 @@ export function createAuth(root: string, origin: string, options: AuthOptions = 
     const route = url.pathname;
     if (!route.startsWith('/v1/auth/')) return false;
     const ip = String(req.headers['x-real-ip'] ?? req.socket.remoteAddress ?? 'unknown').slice(0, 80);
-    if (route === '/v1/auth/config' && req.method === 'GET') { json(res, 200, { email: !!(options.sendCode || options.resendKey && options.emailFrom), github: !!options.github, google: !!options.google }); return true; }
+    if (route === '/v1/auth/config' && req.method === 'GET') { json(res, 200, { unified: !!options.oidc, email: !options.oidc && !!(options.sendCode || options.resendKey && options.emailFrom), github: !options.oidc && !!options.github, google: !options.oidc && !!options.google }); return true; }
+    if (route.startsWith('/v1/auth/aveniqa/')) return handleUnified(req, res, url, ip);
     if (route === '/v1/auth/me' && req.method === 'GET') { json(res, 200, { user: profile(session(req)) }); return true; }
     if (route === '/v1/auth/logout' && req.method === 'POST') {
       db.prepare('DELETE FROM sessions WHERE hash=?').run(digest(bearer(req)));
       res.setHeader('Set-Cookie', '__Host-sofamate=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0'); json(res, 200, { loggedOut: true }); return true;
     }
     if (route === '/v1/auth/email/start' && req.method === 'POST') {
+      if (options.oidc) fail(400, '请使用 Aveniqa 统一登录');
       limit('mail-ip:' + ip, 10, 3600_000);
       const input = await body(), email = emailAddress(input.email), name = displayName(input.name);
       limit('mail:' + digest(email), 3, 3600_000); limit('mail-cooldown:' + digest(email), 1, 60000);
@@ -120,6 +127,7 @@ export function createAuth(root: string, origin: string, options: AuthOptions = 
       json(res, 200, { challengeId: id, expiresIn: 600, retryAfter: 60 }); return true;
     }
     if (route === '/v1/auth/email/verify' && req.method === 'POST') {
+      if (options.oidc) fail(400, '请使用 Aveniqa 统一登录');
       limit('verify:' + ip, 30, 600000);
       const input = await body();
       const challenge = db.prepare('SELECT * FROM email_codes WHERE id=?').get(safeId(input.challengeId)) as { id: string; email: string; name: string; code_hash: string; attempts: number; expires: number } | undefined;
@@ -160,6 +168,7 @@ export function createAuth(root: string, origin: string, options: AuthOptions = 
   }
 
   async function handleOAuth(req: IncomingMessage, res: ServerResponse, url: URL, ip: string) {
+    if (options.oidc) fail(400, '请使用 Aveniqa 统一登录');
     const oauth = url.pathname.match(/^\/v1\/auth\/oauth\/(github|google)\/(start|callback)$/);
     if (!oauth || req.method !== 'GET') fail(404, '接口不存在');
     const provider = oauth[1] as Provider, credentials = options[provider];
@@ -216,6 +225,50 @@ export function createAuth(root: string, origin: string, options: AuthOptions = 
     db.prepare('DELETE FROM sessions WHERE user_id=? AND hash NOT IN (SELECT hash FROM sessions WHERE user_id=? ORDER BY created DESC LIMIT 9)').run(u.id, u.id);
     const sessionToken = opaque(); db.prepare('INSERT INTO sessions VALUES(?,?,?,?)').run(digest(sessionToken), u.id, now() + 30 * DAY, now());
     res.setHeader('Set-Cookie', [`__Host-sofamate=${sessionToken}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=2592000`, '__Host-sofamate-oauth=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0']);
+    res.writeHead(302, { Location: `/login${pending.desktop ? '?desktop=' + pending.desktop : ''}`, 'Cache-Control': 'no-store' }); res.end(); return true;
+  }
+
+  async function handleUnified(req: IncomingMessage, res: ServerResponse, url: URL, ip: string) {
+    const config = options.oidc;
+    if (!config || req.method !== 'GET') fail(404, '接口不存在');
+    const callback = `${origin}/v1/auth/aveniqa/callback`;
+    if (url.pathname === '/v1/auth/aveniqa/start') {
+      limit('unified:' + ip, 20, 600000);
+      const state = opaque(), verifier = randomBytes(32).toString('base64url'), nonce = opaque();
+      db.prepare('INSERT INTO oidc_states VALUES(?,?,?,?,?,?)').run(digest(state), verifier, nonce, safeId(url.searchParams.get('desktop')), null, now() + 600000);
+      const target = new URL(`${config.issuer}/oauth/authorize`);
+      for (const [key, value] of Object.entries({ response_type: 'code', client_id: config.clientId, redirect_uri: callback, scope: 'openid email profile', state, nonce, code_challenge: Buffer.from(digest(verifier), 'hex').toString('base64url'), code_challenge_method: 'S256' })) target.searchParams.set(key, value);
+      res.setHeader('Set-Cookie', `__Host-sofamate-oidc=${state}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=600`);
+      res.writeHead(302, { Location: target.toString(), 'Cache-Control': 'no-store' }); res.end(); return true;
+    }
+    if (url.pathname !== '/v1/auth/aveniqa/callback') fail(404, '接口不存在');
+    const state = safeId(url.searchParams.get('state'));
+    if (!state || cookie(req, '__Host-sofamate-oidc') !== state) fail(400, '登录状态不匹配，请重新登录');
+    const pending = db.prepare('DELETE FROM oidc_states WHERE hash=? AND expires>? RETURNING *').get(digest(state), now()) as { verifier: string; nonce: string; desktop: string; link_user: string | null } | undefined;
+    if (!pending) fail(400, '登录状态已过期，请重新登录');
+    const code = url.searchParams.get('code');
+    if (!code || code.length > 4096) fail(400, '登录已取消，请重试');
+    const token = await external(`${config.issuer}/oauth/token`, { method: 'POST', headers: { Authorization: 'Basic ' + Buffer.from(`${config.clientId}:${config.clientSecret}`).toString('base64'), 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ grant_type: 'authorization_code', code, redirect_uri: callback, code_verifier: pending.verifier }) });
+    if (typeof token.id_token !== 'string' || typeof token.access_token !== 'string') fail(502, '统一登录响应无效');
+    const claims = await verifyIdentityToken(token.id_token, config, pending.nonce, remote);
+    const info = await external(`${config.issuer}/oauth/userinfo`, { headers: { Authorization: `Bearer ${token.access_token}` } });
+    if (info.sub !== claims.sub || info.email_verified !== true) fail(400, '请先验证 Aveniqa 账号邮箱');
+    const email = emailAddress(info.email);
+    const subject = config.issuer + '|' + claims.sub;
+    const existing = db.prepare("SELECT user_id FROM identities WHERE provider='aveniqa' AND subject=?").get(subject) as { user_id: string } | undefined;
+    let u: User;
+    if (existing) u = getUser(existing.user_id)!;
+    else {
+      if (db.prepare('SELECT id FROM users WHERE email=?').get(email)) {
+        fail(409, '此邮箱已被另一身份使用，请使用原 Aveniqa 账号登录');
+      }
+      const id = randomUUID(); db.prepare('INSERT INTO users(id,email,name,created) VALUES(?,?,?,?)').run(id, email, displayName(info.name), now()); u = getUser(id)!;
+    }
+    if (u.disabled) fail(403, '账号已停用');
+    db.prepare("INSERT OR IGNORE INTO identities VALUES('aveniqa',?,?)").run(subject, u.id);
+    const sessionToken = opaque();
+    db.prepare('INSERT INTO sessions VALUES(?,?,?,?)').run(digest(sessionToken), u.id, now() + 30 * DAY, now());
+    res.setHeader('Set-Cookie', [`__Host-sofamate=${sessionToken}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=2592000`, '__Host-sofamate-oidc=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0']);
     res.writeHead(302, { Location: `/login${pending.desktop ? '?desktop=' + pending.desktop : ''}`, 'Cache-Control': 'no-store' }); res.end(); return true;
   }
   return { handle, session, profile, suspend(id: string) { db.prepare('UPDATE users SET disabled=1 WHERE id=?').run(id); db.prepare('DELETE FROM sessions WHERE user_id=?').run(id); }, close() { clearInterval(timer); db.close(); } };

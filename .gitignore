@@ -34,3 +34,4 @@ market-account.bin*
 **/dist/
 **/target/
 **/.DS_Store
+site/assets/companions/*.mp4
