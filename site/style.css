@@ -22,3 +22,12 @@
 @media(max-width:1050px){.site-header{padding-bottom:20px}.site-header nav a{display:inline-block!important}}
 @media(max-width:620px){.home-main .hero{padding:32px 24px}.home-main .hero-description{font-size:15px}.home-main .hero-caption{font-size:9px}.home-main .hero-footnote{font-size:11px;line-height:1.7}.site-header nav{gap:20px;font-size:13px}.hero-visual{padding-top:8px}}
 .about-page .faq-section>h2{font-size:30px;line-height:1.45;text-wrap:balance}
+
+/* Account identity must fit even when a creator uses a long display name. */
+.header-tools .nav-account{display:block;max-width:180px;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.header-tools .nav-account.is-signed-in{color:var(--sand);border-bottom-color:var(--sand)}
+.auth-user,#user-email{overflow-wrap:anywhere}
+.download-quality{padding:26px 30px;margin:28px 0;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.download-quality h2{font-size:23px;letter-spacing:0}
+.download-quality p{font-size:14px;line-height:1.85;color:var(--muted)}
+@media(max-width:620px){.site-header{height:auto;min-height:100px}.header-tools .nav-account{max-width:110px}.download-quality{padding:22px}.header-tools{flex-wrap:wrap}.wordmark{flex-shrink:0}}

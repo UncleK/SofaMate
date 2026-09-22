@@ -6,6 +6,8 @@ const server = await createMarket(
   process.env.SOFAMATE_PUBLIC_ORIGIN ? {
     publicOrigin: process.env.SOFAMATE_PUBLIC_ORIGIN,
     adminTokenHash: process.env.SOFAMATE_ADMIN_TOKEN_HASH,
+    officialCatalog: process.env.SOFAMATE_OFFICIAL_CATALOG,
+    curatorIds: (process.env.SOFAMATE_CURATOR_IDS??'').split(',').map(s=>s.trim()).filter(Boolean),
     maxTotalBytes: Number(process.env.SOFAMATE_MAX_STORAGE_BYTES ?? 10 * 1024 ** 3),
     maxOwnerBytes: Number(process.env.SOFAMATE_MAX_USER_BYTES ?? 2 * 1024 ** 3),
     auth: {

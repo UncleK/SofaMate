@@ -41,6 +41,6 @@ pub fn inspect(path:&Path)->Result<Info,String>{
 pub fn jpeg(b:&[u8])->Result<(),String>{
  if b.len()<32||b.len()>1024*1024||b[..2]!=[255,216]||b[b.len()-2..]!=[255,217]{return Err("预览图需要小于 1MB 的 JPEG".into())}let mut i=2;let mut found=false;
  while i+4<=b.len(){if b[i]!=255{return Err("JPEG 结构无效".into())}let marker=b[i+1];if marker==218||marker==217{break}let n=u16::from_be_bytes([b[i+2],b[i+3]])as usize;if n<2||i+n+2>b.len(){return Err("JPEG 长度无效".into())}
- if [192,193,194].contains(&marker){if n<8{return Err("JPEG 尺寸无效".into())}let h=u16::from_be_bytes([b[i+5],b[i+6]]);let w=u16::from_be_bytes([b[i+7],b[i+8]]);if h==0||w==0||h>1600||w>1600{return Err("预览图尺寸超出限制".into())}found=true}i+=n+2;}
+ if [192,193,194].contains(&marker){if n<8{return Err("JPEG 尺寸无效".into())}let h=u16::from_be_bytes([b[i+5],b[i+6]]);let w=u16::from_be_bytes([b[i+7],b[i+8]]);if h==0||w==0||h>1920||w>1920{return Err("预览图尺寸超出限制".into())}found=true}i+=n+2;}
  if !found{return Err("JPEG 缺少尺寸信息".into())}Ok(())
 }

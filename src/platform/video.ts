@@ -154,7 +154,7 @@ export function inspectJpeg(b: Buffer): void {
       check(n >= 8, 'JPEG 尺寸无效');
       const height = b.readUInt16BE(i + 5),
         width = b.readUInt16BE(i + 7);
-      check(width > 0 && height > 0 && width <= 1600 && height <= 1600, '预览图尺寸超出限制');
+      check(width > 0 && height > 0 && width <= 1920 && height <= 1920, '预览图尺寸超出限制');
       dimensions = true;
     }
     i += n + 2;

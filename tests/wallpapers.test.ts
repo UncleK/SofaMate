@@ -28,3 +28,11 @@ test('all supported language entries preserve interpolation fields',()=>{
   setLocale('ja');assert.equal(t('设为壁纸'),'壁紙に設定');
   setLocale('invalid');assert.equal(getLocale(),'zh-CN');assert.equal(t('设为壁纸'),'设为壁纸');
 });
+test('official catalog appears before download and installed variants join the same theme',()=>{
+  const official=[{id:'room',label:'Room',description:'Night',author:'SofaMate_collection',coverUrl:'https://example.test/cover.jpg',variants:[]}];
+  const fresh=themeWallpapers([],official);
+  assert.equal(fresh.length,1);assert.equal(fresh[0].ready,false);assert.deepEqual(fresh[0].playbackIds,[]);
+  assert.equal(libraryWallpapers([],[]).length,0);
+  const installed=themeWallpapers([preset('room720','720P'),preset('room60','1080P60')],official);
+  assert.equal(installed.length,1);assert.equal(installed[0].ready,true);assert.equal(installed[0].author,'SofaMate_collection');assert.deepEqual(installed[0].playbackIds,['room720','room60']);
+});

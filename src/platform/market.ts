@@ -8,6 +8,7 @@ import { pipeline } from 'node:stream/promises';
 import { inspectVideo, inspectJpeg, MAX_VIDEO_BYTES, type VideoInfo } from './video';
 import { createAuth } from './auth';
 import { MarketError, matches, serial, type MarketOptions } from './market-access';
+import { officialWorks, officialPublisher } from './official-market';
 
 interface Item {
   id: string;
@@ -20,6 +21,7 @@ interface Item {
   createdAt: string;
   state: 'draft' | 'published' | 'withdrawn';
   info?: VideoInfo;
+  coverVersion?:number;
 }
 interface Session {
   id: string;
@@ -55,6 +57,16 @@ export async function createMarket(root: string, port = 47831, options: MarketOp
   const isAdmin = (req: IncomingMessage) => matches(req.headers.authorization?.replace(/^Bearer /, '') ?? '', options.adminTokenHash);
   const mutate = serial();
   const catalog = new Map<string, Item>();
+  const curationPath=path.join(root,'curation.json');
+  const curation=async():Promise<Record<string,{featured:boolean;actor:string;updatedAt:string}>>=>{
+    try{return JSON.parse(await readFile(curationPath,'utf8'));}catch(e:any){if(e.code==='ENOENT')return {};throw e;}
+  };
+  async function curator(req:IncomingMessage){
+    if(isAdmin(req))return 'administrator';
+    try {const s=await session(req);if(options.curatorIds?.includes(s.id))return s.id;}catch{}
+    return null;
+  }
+  async function works(){const selection=await curation();return [...await officialWorks(options.officialCatalog),...[...catalog.values()].filter(i=>i.state==='published').map(publicItem)].map((i:any)=>({...i,featured:selection[i.id]?.featured??i.official===true}));}
   let uploads = 0;
   const busy = new Set<string>();
   const itemDir = (id: string) => {
@@ -102,6 +114,7 @@ export async function createMarket(root: string, port = 47831, options: MarketOp
     return item;
   }
   const publicItem = (i: Item) => ({
+    kind:'video',official:false,
     id: i.id,
     owner: i.owner,
     author: i.author,
@@ -111,8 +124,10 @@ export async function createMarket(root: string, port = 47831, options: MarketOp
     sha256: i.sha256,
     createdAt: i.createdAt,
     info: i.info,
+    coverVersion:i.coverVersion??0,
     coverPath: `/v1/items/${i.id}/cover`,
     downloadPath: `/v1/items/${i.id}/video`,
+    previewPath: `/v1/items/${i.id}/video`,
     sharePath: `/wallpaper/${i.id}`,
   });
   function respond(res: ServerResponse, code: number, value: unknown) {
@@ -187,6 +202,19 @@ export async function createMarket(root: string, port = 47831, options: MarketOp
         return;
       }
       const admin = route.match(/^\/v1\/admin\/(items|users)\/([a-f0-9-]{36})$/);
+      const feature=route.match(/^\/v1\/(?:admin\/featured|curation)\/([a-f0-9-]{36})$/);
+      if(feature&&req.method==='PUT'){
+        const actor=await curator(req);if(!actor)throw new MarketError(403,'需要官方精选权限');
+        const body=await jsonBody(req);if(typeof body.featured!=='boolean')throw Error('精选状态无效');
+        await mutate(async()=>{
+          if(!(await works()).some(i=>i.id===feature[1]))throw new MarketError(404,'作品不存在或未发布');
+          const current=await curation();current[feature[1]]={featured:body.featured,actor,updatedAt:new Date().toISOString()};
+          await writeFile(curationPath+'.tmp',JSON.stringify(current));await rename(curationPath+'.tmp',curationPath);
+        });respond(res,200,{id:feature[1],featured:body.featured});return;
+      }
+      if(req.method==='GET'&&route==='/v1/publishers/SofaMate_collection'){
+        respond(res,200,{...officialPublisher,items:(await works()).filter(i=>i.official)});return;
+      }
       if (admin) {
         if (!isAdmin(req)) throw new MarketError(403, '需要管理员权限');
         if (admin[1] === 'users' && req.method === 'POST' && auth) { auth.suspend(admin[2]); respond(res, 200, { suspended: true }); return; }
@@ -202,22 +230,23 @@ export async function createMarket(root: string, port = 47831, options: MarketOp
       }
       if (req.method === 'GET' && route === '/v1/items') {
         const q = (url.searchParams.get('q') ?? '').slice(0, 100).toLocaleLowerCase();
-        const items: Item[] = [];
-        for (const i of catalog.values()) {
-            if (
-              i.state === 'published' &&
-              `${i.title} ${i.description} ${i.author}`.toLocaleLowerCase().includes(q)
-            )
-              items.push(i);
-        }
+        const items=(await works()).filter(i=>(url.searchParams.get('featured')!=='1'||i.featured)&&(!url.searchParams.get('owner')||i.owner===url.searchParams.get('owner'))&&`${i.title} ${i.description} ${i.author}`.toLocaleLowerCase().includes(q));
         const offset = Math.max(0, Number(url.searchParams.get('offset')) || 0);
         const sorted = items.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
         respond(res, 200, {
-          items: sorted.slice(offset, offset + 50).map(publicItem),
+          items: sorted.slice(offset, offset + 50),
+          canCurate:!!(await curator(req)),
           total: sorted.length,
           nextOffset: offset + 50 < sorted.length ? offset + 50 : null,
         });
         return;
+      }
+      const officialRoute=route.match(/^\/v1\/items\/([a-f0-9-]{36})(?:\/(cover|video))?$/);
+      if(officialRoute&&['GET','HEAD'].includes(req.method??'')){
+        const i=(await works()).find(i=>i.id===officialRoute[1]&&i.official);
+        if(i){if(!officialRoute[2]){respond(res,200,i);return;}const location=officialRoute[2]==='cover'?i.coverPath:i.previewPath;
+          if(!location){respond(res,404,{error:'请在客户端选择完整主题规格'});return;}
+          res.writeHead(302,{Location:location});res.end();return;}
       }
       if (req.method === 'POST' && route === '/v1/items') {
         const s = await session(req),
@@ -239,6 +268,7 @@ export async function createMarket(root: string, port = 47831, options: MarketOp
           sha256: data.sha256,
           createdAt: new Date().toISOString(),
           state: 'draft',
+          coverVersion:data.coverVersion===2?2:0,
         };
         await mutate(async () => {
           const all = [...catalog.values()], mine = all.filter(v => v.owner === s.id);

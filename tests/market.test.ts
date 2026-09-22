@@ -126,6 +126,13 @@ test('bounded media checks reject forged extensions, codec and truncation', asyn
   assert.equal(good.width, 320);
   assert.equal(good.height, 180);
   inspectJpeg(cover);
+  // The standard collage is now 1920x1080; retain a bounded size check.
+  const standard=Buffer.from(cover);let marker=2;
+  while(![0xc0,0xc1,0xc2].includes(standard[marker+1]))marker+=standard.readUInt16BE(marker+2)+2;
+  standard.writeUInt16BE(1080,marker+5);standard.writeUInt16BE(1920,marker+7);
+  inspectJpeg(standard);
+  standard.writeUInt16BE(1921,marker+7);
+  assert.throws(()=>inspectJpeg(standard));
   for (const [name, bytes] of [
     ['not-video', Buffer.from('not an mp4'.repeat(10))],
     ['truncated', video.subarray(0, 120)],

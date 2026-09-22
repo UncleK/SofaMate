@@ -8,7 +8,7 @@ const exe = await fs.readFile('experiments/tauri-client/src-tauri/target/release
 await fs.writeFile(path.join(out, 'SofaMate.exe'), exe);
 let catalog = [];
 if (!publicRelease) {
-  try { catalog = JSON.parse(await fs.readFile('reports/tauri-trial/20260918/trial-catalog.json', 'utf8')).filter(p => p.scope === 'approved-demo'); }
+  try { catalog = JSON.parse(await fs.readFile('reports/official-collection/20260922/local-catalog.json', 'utf8')).filter(p => p.scope === 'approved-demo'); }
   catch (error) { if (error.code !== 'ENOENT') throw error; }
 }
 await fs.writeFile(path.join(out, 'trial-catalog.json'), JSON.stringify(catalog, null, 2));
@@ -17,8 +17,8 @@ https://sofamate.aveniqa.com
 
 双击 SofaMate.exe。导入 MP4 视频，自动生成九宫格并设为桌面壁纸。支持 H.264 视频与 AAC 音频，单文件最大 1 GiB。
 本机使用不需要账号。右上角登录后，可将自己的视频分享到公开市场。浏览和下载无需登录，下载后可以离线播放。登录在系统浏览器中完成，请核对配对码。
-壁纸库保存在 %LOCALAPPDATA%\\ScreenMate\\library（保留目录名以兼容早期版本）。视频会复制到库中，原文件不会被修改。公开版不捆绑截图中的主题视频。
-预览播放/暂停只控制面板视频。设为壁纸旁的下拉菜单提供桌面暂停、继续、停止及音量。停止释放桌面播放器；继续重新加载上次壁纸。关闭面板不停止壁纸；双击托盘打开面板，右键显示菜单。每次运行默认静音；右上角可切换中文、英文、日文。
+壁纸库保存在 %LOCALAPPDATA%\\ScreenMate\\library（保留目录名以兼容早期版本）。视频会复制到库中，原文件不会被修改。精选主题由 SofaMate_collection 提供，选择规格后独立下载，公开版不捆绑视频。完整场景按明确后继随机连续播放，支持短叠化。
+显示器下拉可分别设置各屏幕的壁纸、规格和适配方式。切换已下载规格后显示待应用，点击设为壁纸才生效；当前正在使用的壁纸与规格显示当前壁纸。预览播放/暂停只控制面板视频。设为壁纸旁的下拉菜单提供当前屏幕的暂停、继续、停止及音量。停止释放桌面播放器；继续重新加载上次壁纸。关闭面板不停止壁纸；双击托盘打开面板，右键菜单控制全部已连接屏幕。每次运行默认静音；右上角可切换中文、英文、日文。
 Windows 10/11 x64，需要系统 WebView2 Runtime。客户端不需要 Node.js 或 FFmpeg。
 
 Extract the ZIP and launch SofaMate.exe. Import your own H.264/AAC MP4 (up to 1 GiB), preview it and choose Set as wallpaper. Local playback needs no account. Sign in through your system browser to publish. Downloads remain available offline. Requires Windows 10/11 x64 and Microsoft Edge WebView2 Runtime. Demo artwork is not bundled.

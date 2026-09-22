@@ -4,6 +4,8 @@ export type MarketOptions = {
   publicOrigin?: string;
   auth?: AuthOptions;
   adminTokenHash?: string;
+  officialCatalog?: string;
+  curatorIds?: string[];
   maxTotalBytes?: number;
   maxOwnerBytes?: number;
   maxOwnerItems?: number;

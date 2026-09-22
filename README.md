@@ -12,7 +12,7 @@
 
 A familiar smile, a favorite character, a face you are happy to see. SofaMate turns character videos into desktop wallpapers, bringing a sense of company to work, study and time on your own. Choose the companion you like.
 
-Import an MP4, browse its nine-frame preview and set it behind your desktop icons. Your collection stays local, ready whenever you want a little company.
+Download an official scene or import an MP4, browse its nine-frame preview and set it behind your desktop icons. Your collection stays local, ready whenever you want a little company.
 
 | Your collection | Your controls | Your community |
 | --- | --- | --- |
@@ -26,6 +26,8 @@ Import an MP4, browse its nine-frame preview and set it behind your desktop icon
 - **Muted on startup.** Audio starts muted. Stopping destroys the desktop player; closing the panel keeps the wallpaper running.
 - **Local first.** Import and playback work without an account. Previews are generated on your computer.
 - **One Aveniqa account.** Email codes, GitHub, and Google use the shared account center in your system browser. Windows protects the desktop session with DPAPI.
+- **Independent monitors.** Choose a wallpaper, quality and fit mode for each display. Default fill preserves proportions; fit keeps the whole image with borders.
+- **Official scenes.** Evening living room has complete 720P24, 1080P24 and 1080P60 downloads. Its 28 clips follow defined random paths with smooth transitions. 4K is not offered for public download.
 - **Three languages.** 简体中文 · English · 日本語.
 
 <p align="center"><img src="site/assets/sharing-flow.svg" alt="Local video, nine-frame preview, optional community sharing" width="680"></p>
@@ -33,10 +35,10 @@ Import an MP4, browse its nine-frame preview and set it behind your desktop icon
 ## Get started
 
 1. [Download the Windows ZIP](https://github.com/UncleK/SofaMate/releases/latest/download/SofaMate-Windows-x64.zip) and extract it.
-2. Open `SofaMate.exe`, choose **Import video**, and select an H.264/AAC MP4.
-3. Preview it, then choose **Set as wallpaper**. Double-click the tray icon to return to the panel.
+2. Open `SofaMate.exe`. Download a featured or community work, or import your own H.264/AAC MP4.
+3. Select a monitor and quality, then choose **Set as wallpaper**. Selecting a downloaded quality does not change the desktop until you apply it. Double-click the tray icon to return to the panel.
 
-Windows 10/11 x64 and [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/) are required. The public beta supports the primary monitor and videos up to 1 GiB. The ZIP is unsigned. Demonstration scene videos shown in the screenshots are not bundled; bring your own video or download from the community.
+Windows 10/11 x64 and [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/) are required. The public beta supports independent multi-monitor wallpapers and imports up to 1 GiB per video. The Windows ZIP is about 1.95 MiB. The ZIP is unsigned. Videos are not bundled; official scene packs and community works are downloaded separately. New Aveniqa users can register through email verification or Google/GitHub in the shared account flow.
 
 ## Development
 
@@ -63,7 +65,7 @@ The market is a separate Node.js service. See [deployment and authentication](de
 
 ## Project status
 
-SofaMate is in public beta. Multi-monitor playback, automatic video conversion, payments and automatic updates are not included. The repository does not contain production credentials, user uploads, or private authoring archives.
+SofaMate is in public beta. Automatic video conversion, payments and automatic updates are not included. See [current release notes](docs/RELEASE_NOTES.md) for the available formats and validation limits. The repository does not contain production credentials, user uploads, or private authoring archives.
 
 Questions and reproducible bugs are welcome in [Issues](https://github.com/UncleK/SofaMate/issues). Please keep private email addresses, tokens and local filesystem paths out of public reports. See [third-party notices](THIRD_PARTY_NOTICES.md). A license for SofaMate source and demo artwork has not yet been designated.
 

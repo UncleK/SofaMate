@@ -1,17 +1,19 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
-use std::{collections::HashMap, fs::{self, File}, io::{Read, Seek, SeekFrom}, path::{Path, PathBuf}, sync::{Arc, Mutex, atomic::{AtomicBool, AtomicU64, Ordering}}};
+use std::{collections::HashMap, fs::{self, File}, io::{Read, Seek, SeekFrom}, path::{Path, PathBuf}, sync::{Arc, Mutex, atomic::{AtomicBool}}};
 use serde::Deserialize;
 use serde_json::{json, Value};
 use sha2::{Digest, Sha256};
 use tauri::{Emitter, Manager, WebviewUrl, WebviewWindowBuilder, State, menu::{Menu, MenuItem}, tray::{TrayIconBuilder, TrayIconEvent, MouseButton}};
 use tauri_plugin_global_shortcut::{Code, GlobalShortcutExt, Modifiers, Shortcut, ShortcutState};
 mod desktop;
+mod displays;
 mod video;
 mod picker;
 mod library;
 mod market;
 mod account;
 mod runtime;
+mod official;
 // Windows sharing one WebView2 data folder must use matching environment options.
 const WEBVIEW_ARGS:&str="--autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows";
 
@@ -19,7 +21,7 @@ const WEBVIEW_ARGS:&str="--autoplay-policy=no-user-gesture-required --disable-ba
 struct Media { path: PathBuf, sha256: String, bytes: u64 }
 #[derive(Clone, Deserialize)]
 struct Preset { id: String, label: String, scope: String, data: Value, files: HashMap<String, Media>, #[serde(default)] presentation:Value }
-struct Trial { enabled:AtomicBool, generation:AtomicU64, transition:Mutex<()>, volume:Mutex<f64>, language:Mutex<String>, tray_items:Mutex<Vec<(String,MenuItem<tauri::Wry>)>>, desktop_mode:bool, presets: Vec<Preset>, selected: Mutex<String>, metrics: Mutex<Value>, attached: Mutex<bool>, report: Option<PathBuf>, library:Arc<library::Library>, media:Arc<Mutex<HashMap<String,Media>>> }
+struct Trial { displays:Mutex<displays::Config>, enabled:AtomicBool, transition:Mutex<()>, language:Mutex<String>, tray_items:Mutex<Vec<(String,MenuItem<tauri::Wry>)>>, desktop_mode:bool, presets: Mutex<Vec<Preset>>, official_catalog:Mutex<Value>, official_source:Option<PathBuf>, selected: Mutex<String>, report: Option<PathBuf>, library:Arc<library::Library>, media:Arc<Mutex<HashMap<String,Media>>> }
 fn register_entry(state:&Trial,e:&library::Entry) {
  let mut media=state.media.lock().unwrap();
  for name in ["video.mp4","cover.jpg"] {if let Ok(path)=state.library.path(&e.id,name){if let Ok(m)=fs::metadata(&path){media.insert(format!("local/{}/{name}",e.id),Media{path,bytes:m.len(),sha256:String::new()});}}}
@@ -27,20 +29,13 @@ fn register_entry(state:&Trial,e:&library::Entry) {
 fn current_payload(state:&Trial,id:&str)->Result<Value,String>{
  if let Some(id)=id.strip_prefix("local:"){let e=state.library.get(id)?;if !e.ready{return Err("请先生成九宫格预览".into())}return Ok(state.library.payload(&e))}
  if id.is_empty(){return Ok(json!({"kind":"empty"}))}
- Ok(payload(state.presets.iter().find(|p|p.id==id).ok_or("Unknown preset")?))
+ Ok(payload(state.presets.lock().unwrap().iter().find(|p|p.id==id).ok_or("请先下载这个规格的主题")?))
 }
 fn hash(path: &Path) -> Result<String, String> {
     let mut f=File::open(path).map_err(|e|e.to_string())?; let mut h=Sha256::new(); let mut b=[0u8;65536];
     loop {let n=f.read(&mut b).map_err(|e|e.to_string())?; if n==0 {break}; h.update(&b[..n]);} Ok(format!("{:x}",h.finalize()))
 }
 fn payload(p: &Preset) -> Value { json!({"data":p.data,"baseUrl":format!("http://scene.localhost/{}/",p.id),"scope":p.scope,"label":p.label}) }
-fn command(app: &tauri::AppHandle, action: &str, value: Value) {
-    let _=app.emit_to("wallpaper","trial-command",json!({"action":action,"payload":value}));
-    if let Some(w)=app.get_webview_window("wallpaper") {
-        if action=="hide" {let _=w.hide();}
-        else if action=="resume"||action=="start"||action=="load" {let _=desktop::show(&w);}
-    }
-}
 fn open_controls(app:&tauri::AppHandle)->tauri::Result<()> {
     if let Some(w)=app.get_webview_window("controls") { w.show()?;w.set_focus()?;return Ok(()) }
     let w=WebviewWindowBuilder::new(app,"controls",WebviewUrl::App("index.html".into()))
@@ -50,24 +45,32 @@ fn open_controls(app:&tauri::AppHandle)->tauri::Result<()> {
 }
 #[tauri::command]
 async fn call(app:tauri::AppHandle, window:tauri::WebviewWindow, state:State<'_,Trial>, action:String, value:Option<Value>)->Result<Value,String>{
-    if !["controls","wallpaper"].contains(&window.label()) {return Err("Unknown window".into())}
-    if window.label()=="wallpaper" && !["current","playback-state","metrics"].contains(&action.as_str()){return Err("Controls only".into())}
+    let window_monitor=runtime::window_id(&state,window.label());
+    if window.label()!="controls" && window_monitor.is_none(){return Err("Unknown window".into())}
+    if window_monitor.is_some() && !["current","playback-state","metrics"].contains(&action.as_str()){return Err("Controls only".into())}
     let arg=value.unwrap_or(Value::Null);
-    if action=="preferences" {return Ok(json!({"language":*state.language.lock().unwrap()}))}
+    if action=="official-catalog" {return Ok(official::catalog(&state))}
+    if action=="official-refresh"||action=="official-install" {let handle=app.clone();return tauri::async_runtime::spawn_blocking(move||{if action=="official-install"{official::install(&handle,arg.as_str().ok_or("规格无效")?)}else{let s=handle.state::<Trial>();official::refresh(&s)?;official::register_covers(&s);Ok(official::catalog(&s))}}).await.map_err(|e|e.to_string())?}
+    if action=="preferences" {return Ok(json!({"language":*state.language.lock().unwrap(),"fit":runtime::fit(&state)}))}
+    if action=="displays"{return runtime::snapshot(&app)}
+    if action=="display-select"{return runtime::set_target(&app,arg.as_str().ok_or("Invalid display")?)}
+    if action=="set-fit"{let id=runtime::resolve(&app,&arg)?;runtime::set_fit(&app,&id,arg.as_str().or(arg["fit"].as_str()).ok_or("Invalid fit")?)?;return Ok(Value::Null)}
+    if action=="library-folder"{state.library.open_folder()?;return Ok(Value::Null)}
     if action=="set-language" {let lang=arg.as_str().filter(|s|["zh-CN","en","ja"].contains(s)).ok_or("Invalid language")?;library::save_json(&state.library.root.join("preferences.json"),&json!({"language":lang}))?;*state.language.lock().unwrap()=lang.into();for(id,item)in state.tray_items.lock().unwrap().iter(){item.set_text(runtime::tray_text(id,lang)).map_err(|e|e.to_string())?;}return Ok(Value::Null)}
     if action=="library-list" {let entries=state.library.entries.lock().unwrap().clone();for e in &entries{register_entry(&state,e);}return Ok(json!(entries))}
     if action=="market-profile" {return Ok(account::profile(&state.library))}
     if action=="market-info" {return Ok(json!({"public":state.library.port==0}))}
     if ["account-start","account-poll","account-logout","account-manage"].contains(&action.as_str()) {let lib=state.library.clone();return tauri::async_runtime::spawn_blocking(move||match action.as_str(){"account-start"=>account::start(&lib),"account-poll"=>account::poll(&lib),"account-logout"=>account::logout(&lib),_=>account::manage(&lib)}).await.map_err(|e|e.to_string())?}
     if action=="transfer-cancel" {state.library.cancel.store(true,std::sync::atomic::Ordering::SeqCst);return Ok(Value::Null)}
-    if ["import","save-cover","market-list","market-publish","market-download","market-withdraw"].contains(&action.as_str()) {
+    if action=="market-list" {let lib=state.library.clone();return tauri::async_runtime::spawn_blocking(move||market::list(&lib,arg["query"].as_str().unwrap_or(""),arg["offset"].as_u64().unwrap_or(0),arg["featured"].as_bool().unwrap_or(false))).await.map_err(|e|e.to_string())?}
+    if ["import","save-cover","market-publish","market-download","market-withdraw","market-feature"].contains(&action.as_str()) {
         let language=state.language.lock().unwrap().clone();let app2=app.clone();let lib=state.library.clone();let owner=window.hwnd().map_err(|e|e.to_string())?.0 as isize;
         return tauri::async_runtime::spawn_blocking(move||{
             let _operation=lib.begin()?;
             let result=match action.as_str(){
                 "import"=>{if let Some(path)=picker::video(owner,&language)? {let e=lib.import(&path,Some(&app2))?;register_entry(&app2.state::<Trial>(),&e);Ok(json!(e))}else{Ok(Value::Null)}},
-                "save-cover"=>{let id=arg["id"].as_str().ok_or("壁纸标识无效")?;let bytes:Vec<u8>=serde_json::from_value(arg["bytes"].clone()).map_err(|_|"预览图无效")?;let e=lib.cover(id,&bytes)?;register_entry(&app2.state::<Trial>(),&e);Ok(json!(e))},
-                "market-list"=>market::list(&lib,arg["query"].as_str().unwrap_or(""),arg["offset"].as_u64().unwrap_or(0)),
+                "save-cover"=>{let id=arg["id"].as_str().ok_or("壁纸标识无效")?;let bytes:Vec<u8>=serde_json::from_value(arg["bytes"].clone()).map_err(|_|"预览图无效")?;let e=lib.cover(id,&bytes,2)?;register_entry(&app2.state::<Trial>(),&e);Ok(json!(e))},
+                "market-feature"=>market::feature(&lib,arg["id"].as_str().ok_or("分享标识无效")?,arg["featured"].as_bool().ok_or("精选状态无效")?),
                 "market-publish"=>market::publish(&lib,&app2,arg["id"].as_str().ok_or("壁纸不存在")?,arg["title"].as_str().ok_or("请填写标题")?,arg["description"].as_str().unwrap_or(""),arg["name"].as_str().unwrap_or("本机创作者")),
                 "market-download"=>{let e=market::download(&lib,&app2,arg.as_str().ok_or("分享标识无效")?)?;register_entry(&app2.state::<Trial>(),&e);Ok(json!(e))},
                 "market-withdraw"=>market::withdraw(&lib,arg.as_str().ok_or("分享标识无效")?),
@@ -77,23 +80,19 @@ async fn call(app:tauri::AppHandle, window:tauri::WebviewWindow, state:State<'_,
         }).await.map_err(|e|e.to_string())?;
     }
     match action.as_str(){
-        "catalog"=>Ok(json!({"presets":state.presets.iter().map(|p|json!({"id":p.id,"label":p.label,"scope":p.scope,"presentation":p.presentation,"baseUrl":format!("http://scene.localhost/{}/",p.id)})).collect::<Vec<_>>(),"selected":*state.selected.lock().unwrap()})),
-        "current"=>{let id=state.selected.lock().unwrap();runtime::payload(&state,&id)},
+        "catalog"=>Ok(json!({"presets":state.presets.lock().unwrap().iter().map(|p|json!({"id":p.id,"label":p.label,"scope":p.scope,"presentation":p.presentation,"baseUrl":format!("http://scene.localhost/{}/",p.id)})).collect::<Vec<_>>(),"selected":runtime::selected(&state,&runtime::target(&state))})),
+        "current"=>{let id=window_monitor.clone().unwrap_or_else(||runtime::target(&state));runtime::payload(&state,&id)},
         "preview-payload"=>current_payload(&state,arg.as_str().ok_or("Invalid selection")?),
-        "select"=>{runtime::start(&app,arg.as_str().ok_or("Invalid selection")?)?;Ok(Value::Null)},
-        "metrics"=>Ok(json!({"playback":*state.metrics.lock().unwrap(),"attached":app.get_webview_window("wallpaper").map(|w|desktop::is_attached(&w)).unwrap_or(false),"windowPresent":app.get_webview_window("wallpaper").is_some(),"selected":*state.selected.lock().unwrap(),"enabled":state.enabled.load(Ordering::SeqCst)})),
+        "select"=>{let monitor=runtime::resolve(&app,&arg)?;runtime::start(&app,&monitor,arg.as_str().or(arg["id"].as_str()).ok_or("Invalid selection")?)?;Ok(Value::Null)},
+        "metrics"=>{let id=window_monitor.clone().map(Ok).unwrap_or_else(||runtime::resolve(&app,&arg))?;Ok(runtime::metrics(&app,&id))},
         "controls"=>{open_controls(&app).map_err(|e|e.to_string())?;Ok(Value::Null)},
         "panel-close"=>{if window.label()!="controls"{return Err("Controls only".into())}window.close().map_err(|e|e.to_string())?;Ok(Value::Null)},
-        "playback-state"=>{
-            if !state.enabled.load(Ordering::SeqCst) || arg["playbackId"].as_u64()!=Some(state.generation.load(Ordering::SeqCst)) || arg["selectionId"].as_str()!=Some(state.selected.lock().unwrap().as_str()) {return Ok(Value::Null)}
-            runtime::publish(&app,arg);Ok(Value::Null)},
-        "attach"=>{let w=app.get_webview_window("wallpaper").ok_or("No player window")?;
-            desktop::attach(&app,&w)?;
-            *state.attached.lock().unwrap()=true;Ok(Value::Null)},
-        "stop"|"hide"=>{runtime::stop(&app)?;Ok(Value::Null)},
-        "resume"|"start"=>{runtime::resume(&app)?;Ok(Value::Null)},
-        "pause"=>{command(&app,"pause",Value::Null);Ok(Value::Null)},
-        "volume"=>{let v=arg.as_f64().filter(|v|v.is_finite()&&*v>=0.&&*v<=1.).ok_or("Invalid volume")?; runtime::volume(&app,v);Ok(Value::Null)},
+        "playback-state"=>{let id=window_monitor.ok_or("Player only")?;runtime::accept_metrics(&app,&id,arg);Ok(Value::Null)},
+        "attach"=>{let id=runtime::resolve(&app,&arg)?;let monitor=displays::list(&app)?.into_iter().find(|d|d.id==id).ok_or("No display")?;let w=app.get_webview_window(&monitor.window()).ok_or("No player window")?;desktop::attach(&app,&w,&monitor)?;Ok(Value::Null)},
+        "stop"|"hide"=>{let id=runtime::resolve(&app,&arg)?;runtime::stop(&app,&id)?;Ok(Value::Null)},
+        "resume"|"start"=>{let id=runtime::resolve(&app,&arg)?;runtime::resume(&app,&id)?;Ok(Value::Null)},
+        "pause"=>{let id=runtime::resolve(&app,&arg)?;runtime::command(&app,&id,"pause",Value::Null);Ok(Value::Null)},
+        "volume"=>{let id=runtime::resolve(&app,&arg)?;let v=arg.as_f64().or(arg["volume"].as_f64()).filter(|v|v.is_finite()&&*v>=0.&&*v<=1.).ok_or("Invalid volume")?;runtime::volume(&app,&id,v);Ok(Value::Null)},
         "exit"=>{app.exit(0);Ok(Value::Null)},
         _=>Err("Unsupported command".into())
     }
@@ -143,21 +142,24 @@ fn main(){
     let media=Arc::new(Mutex::new(media));let protocol_media=media.clone();
     let enabled=fs::read(lib.root.join("playback-enabled.json")).ok().and_then(|b|serde_json::from_slice::<bool>(&b).ok()).unwrap_or(true);
     let language=fs::read(lib.root.join("preferences.json")).ok().and_then(|b|serde_json::from_slice::<Value>(&b).ok()).and_then(|v|v["language"].as_str().map(String::from)).filter(|v|["zh-CN","en","ja"].contains(&v.as_str())).unwrap_or("zh-CN".into());
-    let state=Trial{enabled:AtomicBool::new(enabled),generation:AtomicU64::new(1),transition:Mutex::new(()),volume:Mutex::new(0.),language:Mutex::new(language),tray_items:Mutex::new(vec![]),desktop_mode:attach_on_start,presets,selected:Mutex::new(selected),metrics:Mutex::new(json!({"stopped":true,"paused":true,"selectionId":null,"volume":0,"frames":0,"videoSlots":0})),attached:Mutex::new(false),report:argument("--report").map(PathBuf::from),library:lib,media};
+    let official_source=argument("--official-store").map(PathBuf::from);
+    let official_catalog=official::initial(&lib,official_source.as_deref());
+    let display_config=fs::read(lib.root.join("displays.json")).ok().and_then(|b|serde_json::from_slice::<displays::Config>(&b).ok()).unwrap_or_default();
+    let state=Trial{displays:Mutex::new(display_config),enabled:AtomicBool::new(enabled),transition:Mutex::new(()),language:Mutex::new(language),tray_items:Mutex::new(vec![]),desktop_mode:attach_on_start,presets:Mutex::new(presets),official_catalog:Mutex::new(official_catalog),official_source,selected:Mutex::new(selected),report:argument("--report").map(PathBuf::from),library:lib,media};
+    official::restore(&state);official::register_covers(&state);
+    if let Some(saved)=fs::read(state.library.root.join("selected.json")).ok().and_then(|b|serde_json::from_slice::<String>(&b).ok()){if current_payload(&state,&saved).is_ok(){*state.selected.lock().unwrap()=saved;}}
     for e in state.library.entries.lock().unwrap().iter(){register_entry(&state,e);}
     tauri::Builder::default().plugin(tauri_plugin_wallpaper::init())
         .plugin(tauri_plugin_global_shortcut::Builder::new().with_handler(|app,_,event|{
-            if event.state()==ShortcutState::Pressed {let app=app.clone();std::thread::spawn(move||{let _=runtime::stop(&app);});}
+            if event.state()==ShortcutState::Pressed {let app=app.clone();std::thread::spawn(move||{runtime::all_command(&app,"stop");});}
         }).build())
         .manage(state)
         .register_asynchronous_uri_scheme_protocol("scene",move|_context,request,responder|{let m=protocol_media.clone();std::thread::spawn(move||responder.respond(media_response(&m,request)));})
         .invoke_handler(tauri::generate_handler![call])
         .setup(move|app|{
+            runtime::ensure(app.handle()).map_err(std::io::Error::other)?;
+            let handle=app.handle().clone();std::thread::spawn(move||{let _=runtime::reconcile(&handle);desktop::watch(handle);});
             app.global_shortcut().register(Shortcut::new(Some(Modifiers::CONTROL|Modifiers::ALT|Modifiers::SHIFT),Code::KeyH))?;
-            if app.state::<Trial>().enabled.load(Ordering::SeqCst) {
-                let id=app.state::<Trial>().selected.lock().unwrap().clone();
-                if !id.is_empty(){let handle=app.handle().clone();std::thread::spawn(move||{if let Err(error)=runtime::start(&handle,&id){eprintln!("Startup failed: {error}");}});}
-            }
             if !probe{open_controls(app.handle())?;}
             let menu=Menu::new(app)?;
             let lang=app.state::<Trial>().language.lock().unwrap().clone();
@@ -173,9 +175,8 @@ fn main(){
                 let app=app.clone();let id=event.id.as_ref().to_string();
                 std::thread::spawn(move||{match id.as_str(){
                     "controls"=>{let _=open_controls(&app);},"exit"=>app.exit(0),
-                    "stop"=>{let _=runtime::stop(&app);},"resume"=>{let _=runtime::resume(&app);},
-                    "mute"=>runtime::volume(&app,0.),"sound"=>runtime::volume(&app,0.5),
-                    _=>command(&app,&id,Value::Null)
+                    _=>runtime::all_command(&app,&id)
+
                 }});
             }).build(app)?;Ok(())
         }).build(tauri::generate_context!()).expect("SofaMate failed to start").run(|_,event|{

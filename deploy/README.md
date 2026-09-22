@@ -18,7 +18,7 @@ Use an isolated service user, data directory and loopback port. `sofamate.servic
 
 The example Nginx configuration terminates HTTPS and serves the website. Set the exact canonical origin in both Nginx and the service configuration. Provision a valid certificate before enabling the HTTPS block. Uploads stream to disk; the public API never accepts a supplied filesystem path. Never expose the loopback API port.
 
-The included certificate timer uses a separately pinned official Certbot image, recorded in `/etc/sofamate/certbot-image`. It renews via the ACME webroot without stopping other applications. Keep the image maintained. After each release, validate Nginx before reloading it and check `/health` plus `/v1/auth/config`.
+The included certificate timer uses a separately pinned official Certbot image, recorded in `/etc/sofamate/certbot-image`. It renews via the ACME webroot without stopping other applications. Keep the image maintained. After each release, validate Nginx before reloading it and check `/health` plus `/v1/auth/config`. Preserve the exact `/v1/auth/me` and `/v1/auth/config` locations: their read-only status checks use the regular API quota so navigation does not exhaust the stricter sign-in quota.
 
 ## Authentication
 
@@ -30,6 +30,8 @@ Web sessions are HttpOnly, Secure, SameSite cookies. Desktop authorization uses 
 
 ## Capacity and moderation
 
+Official scene packs are listed alongside community videos. Set `SOFAMATE_OFFICIAL_CATALOG` to the operator-owned catalog. `SOFAMATE_CURATOR_IDS` is a comma-separated allowlist of verified user IDs; a display name never grants curation rights. `/v1/curation/:id` updates `curation.json`, and `GET /v1/items?featured=1` lists featured works. Official works are featured by default; community works require explicit selection. `SofaMate_collection` currently denotes the managed publisher, not a registered login. Do not auto-promote the first registrant. The operator-only `scripts/curate-market.mjs` accepts `--data <market-data> --catalog <official-catalog>` for read-only inspection and `--feature <work-id>` or `--unfeature <work-id>` for a published work. Do not edit curation concurrently through this offline tool and the API.
+
 Default public beta limits: 1 GiB per video, 2 GiB and 50 items per account, 10 GiB total, 1,000 active items, five unfinished drafts per account, two simultaneous uploads. Draft capacity is reserved before uploading; expired drafts are removed after 24 hours by a periodic cleanup. These limits are a deliberate beta budget, not a scaling claim.
 
 Uploads require an account; browsing and downloads are public. Owners can withdraw their uploads. An administrator can withdraw any item or suspend an account through `/v1/admin/items/:id` (DELETE) and `/v1/admin/users/:id` (POST), using a dedicated bearer credential whose SHA-256 is configured on the server. Nginx blocks these routes publicly; use the server's loopback interface with the canonical Host header over SSH. Never put administrator credentials in the client or repository.
@@ -40,7 +42,7 @@ Access logs omit query strings so OAuth codes and pairing identifiers are not lo
 
 ## Website discovery and official preview
 
-Home, Discover (`/market`), About and Download are separate pages. Discover loads actual community works from the same `/v1/items` catalog as the client. Preview plays inside its original card, starts only on request and pauses offscreen. The separate download page retains the selected video and offers the Windows client plus a video download/import path. It does not claim automatic installation of a complete official theme. Chinese, English and Japanese have static localized pages; see [website authoring](../docs/WEBSITE.md).
+Home, Discover (`/market`), About and Download are separate pages. Discover loads official scenes and community works from the same `/v1/items` catalog as the client. Preview plays inside its original card, starts only on request and pauses offscreen. The separate download page retains the selection: official scenes direct users to choose a full pack in the client, while community videos offer a video download/import path. Chinese, English and Japanese have static localized pages; all pages refresh the nickname from the server session. See [website authoring](../docs/WEBSITE.md).
 
 Keep the approved preview outside Git and release directories at `/srv/sofamate/public-media/night-scene.mp4`, readable by Nginx. The exact `/previews/night-scene.mp4` location supports range requests and limits transfer rate. The selected E12 screen-wiping preview has SHA-256 `a6aee3b093d5d450ae72a2840c6ba44355e802cac331b8c27408e319e3569536`, 5,332,657 bytes. It is one 720P24 excerpt, not a full scene graph. Reuse this media directory on later deployments.
 

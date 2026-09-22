@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 import { invoke } from '@tauri-apps/api/core';
-import { listen } from '@tauri-apps/api/event';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { VideoPlayer } from '../../src/renderer/player';
 import { LoopPlayer } from './loop-player';
 import { validateRelease } from '../../src/core/validate';
@@ -19,6 +19,8 @@ if (wallpaper) {
   let currentScope = '';
   let lastPublish = 0;
   let lastTransitions = -1;
+  let lastPaused: boolean | undefined;
+  let lastStopped: boolean | undefined;
   let epoch = 0;
   let identity: any = {};
   function publish(metrics: any) {
@@ -28,8 +30,9 @@ if (wallpaper) {
   }
   async function load(p: any) {
     const generation = ++epoch;
-    identity = { selectionId: p.selectionId, playbackId: p.playbackId };
+    identity = { selectionId: p.selectionId, playbackId: p.playbackId, monitorId:p.monitorId };
     volume = p.volume ?? 0;
+    document.body.dataset.fit = p.fit === 'contain' ? 'contain' : 'cover';
     player?.dispose();
     player = null;
     currentScope = p.scope;
@@ -61,11 +64,14 @@ if (wallpaper) {
         (window as any).screenmateMetrics = { ...metrics, ...identity, volume };
         if (
           performance.now() - lastPublish > 900 ||
+          metrics.paused !== lastPaused || metrics.stopped !== lastStopped ||
           metrics.transitions !== lastTransitions ||
           metrics.fault
         ) {
           lastPublish = performance.now();
           lastTransitions = metrics.transitions;
+          lastPaused = metrics.paused;
+          lastStopped = metrics.stopped;
           publish({
             ...metrics,
             scope: currentScope,
@@ -92,10 +98,11 @@ if (wallpaper) {
     player.setVolume(volume);
     await player.start();
   }
-  await listen<any>('trial-command', ({ payload: c }) => {
+  await getCurrentWebviewWindow().listen<any>('trial-command', ({ payload: c }) => {
     chain = chain
       .then(async () => {
         if (c.action === 'load') await load(c.payload);
+        else if(c.action === 'fit') document.body.dataset.fit = c.payload === 'contain' ? 'contain' : 'cover';
         else if (c.action === 'start') {
           player?.show();
           await player?.start();

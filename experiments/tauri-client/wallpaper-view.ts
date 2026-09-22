@@ -13,15 +13,17 @@ type Options = {
   report: (error: unknown) => void;
   importVideo: () => void;
   browseMarket: () => void;
+  download?: (id: string) => Promise<void>;
+  downloadMarket?: (id:string) => Promise<void>;
 };
 export function wallpaperView(root: HTMLElement, featured: boolean, options: Options) {
   const title = featured ? '精选主题' : '我的壁纸';
   root.innerHTML = `<div class="library-layout wallpaper-view"><aside class="library-rail">
     <div class="rail-heading"><h1>${t(title)}</h1><span data-ui="count"></span></div>
     <label class="rail-search">${icon('search')}<input data-ui="query" aria-label="${t(featured ? '搜索精选主题' : '搜索我的壁纸')}" placeholder="${t(featured ? '搜索主题' : '搜索壁纸')}" maxlength="100"></label>
-    <div data-ui="list" class="wallpaper-list"></div><p class="rail-note">${t(featured ? '留一点时间，给生活。' : '已安装的主题和视频，都在这里')}</p>
+    <div data-ui="list" class="wallpaper-list"></div><p class="rail-note">${t(featured ? '留一点时间，给生活。' : '已安装的主题和视频，都在这里')}</p><button data-ui="library-folder">${t('打开壁纸文件夹')}</button>
     </aside><div class="library-content"><div data-ui="empty" class="empty-state">${icon('wallpaper')}<h2 data-ui="empty-title"></h2><p data-ui="empty-description"></p><div data-ui="empty-actions" class="empty-actions"><button data-ui="empty-import" class="primary">${icon('plus')}${t('导入视频')}</button><button data-ui="empty-market">${icon('market')}${t('分享市场')}</button></div></div>
-    <article data-ui="detail" class="wallpaper-detail"><div class="detail-heading"><h2 data-ui="title"></h2><span data-ui="position" class="saved-label"></span></div>
+    <article data-ui="detail" class="wallpaper-detail"><div class="detail-heading"><h2 data-ui="title"></h2><label class="display-choice">${t('显示器')}<select data-ui="monitor" aria-label="${t('显示器')}"></select></label><span data-ui="position" class="saved-label"></span></div>
     <div class="media-frame"><img data-ui="cover" alt="${t('视频九宫格预览')}"><div data-ui="preview-host" class="preview-host" hidden></div>
       <button data-ui="previous" class="browse-arrow previous" aria-label="${t('上一张壁纸')}">‹</button><button data-ui="next" class="browse-arrow next" aria-label="${t('下一张壁纸')}">›</button>
       <button data-ui="make-cover" hidden>${t('生成九宫格预览')}</button></div>
@@ -29,14 +31,21 @@ export function wallpaperView(root: HTMLElement, featured: boolean, options: Opt
     <div class="wallpaper-toolbar"><div class="preview-toolbar"><button data-ui="preview-toggle" class="round-button" aria-label="${t('播放预览')}" title="${t('播放预览')}">${icon('play')}</button><span data-ui="preview-status">${t('预览视频')}</span>
       <label class="sound" title="${t('预览音量')}">${icon('volume')}<input data-ui="preview-volume" aria-label="${t('预览音量')}" type="range" min="0" max="1" step="0.05" value="0"></label><button data-ui="sheet" class="sheet-button" aria-label="${t('查看九宫格')}" title="${t('查看九宫格')}" hidden>${icon('library')}</button></div>
     <div class="actions"><div class="desktop-status" aria-label="${t('桌面壁纸')}" title="${t('桌面壁纸')}"><strong data-ui="status"></strong></div>
-      <div class="wallpaper-split"><button data-ui="apply" class="primary">${icon('wallpaper')}${t('设为壁纸')}</button><details data-ui="desktop-menu" class="desktop-menu"><summary aria-label="${t('壁纸控制')}" title="${t('壁纸控制')}">${icon('chevron')}</summary><div class="desktop-popover">
+      <div class="wallpaper-split"><button data-ui="apply" class="primary">${icon('wallpaper')}<span data-ui="apply-label">${t('设为壁纸')}</span></button><details data-ui="desktop-menu" class="desktop-menu"><summary aria-label="${t('壁纸控制')}" title="${t('壁纸控制')}">${icon('chevron')}</summary><div class="desktop-popover">
         <button data-ui="desktop-toggle"><span data-ui="desktop-toggle-icon" class="menu-action-icon">${icon('pause')}</span><span data-ui="desktop-toggle-label">${t('暂停壁纸')}</span></button><button data-ui="stop"><span class="menu-action-icon">${icon('stop')}</span><span>${t('停止壁纸')}</span></button>
         <label class="wallpaper-volume"><span class="volume-heading"><span>${t('壁纸音量')}</span><output data-ui="volume-value">0%</output></span><input data-ui="volume" aria-label="${t('壁纸音量')}" type="range" min="0" max="1" step="0.05" value="0"></label>
-      </div></details></div><button data-ui="share" aria-label="${t('分享')}" title="${t('分享')}">${icon('share')}<span class="action-label">${t('分享')}</span></button><button data-ui="desktop" aria-label="${t('返回桌面')}" title="${t('返回桌面')}">${icon('desktop')}<span class="action-label">${t('返回桌面')}</span></button></div></div>
-    </article></div></div>`;
+        <label class="wallpaper-volume">${t('画面适配')}<select data-ui="fit" aria-label="${t('画面适配')}"><option value="cover">${t('铺满桌面（裁剪）')}</option><option value="contain">${t('完整画面（留边）')}</option></select></label>
+      </div></details></div><button data-ui="share" aria-label="${t('分享')}" title="${t('分享')}">${icon('share')}<span class="action-label">${t('分享')}</span></button><button data-ui="desktop" aria-label="${t('返回桌面')}" title="${t('返回桌面')}">${icon('desktop')}<span class="action-label">${t('返回桌面')}</span></button>
+      <p data-ui="action-notice" class="wallpaper-action-notice" role="status"></p></div></div></article></div></div>`;
   const el = <T extends HTMLElement = HTMLElement>(name: string) =>
     root.querySelector<T>(`[data-ui="${name}"]`)!;
   const button = (name: string) => el<HTMLButtonElement>(name);
+  let actionNoticeTimer: ReturnType<typeof setTimeout> | undefined;
+  const actionNotice = (text:string) => {
+    clearTimeout(actionNoticeTimer);
+    el('action-notice').textContent=text;
+    if(text)actionNoticeTimer=setTimeout(()=>{el('action-notice').textContent='';},3500);
+  };
   let items: Wallpaper[] = [],
     selected = '',
     selectedQuality = '',
@@ -57,6 +66,10 @@ export function wallpaperView(root: HTMLElement, featured: boolean, options: Opt
     (button(name).onclick = () => void Promise.resolve().then(fn).catch(options.report));
   on('empty-import', options.importVideo);
   on('empty-market', options.browseMarket);
+  on('library-folder',()=>options.call('library-folder'));
+  void options.call('preferences').then(p=>{el<HTMLSelectElement>('fit').value=p.fit;}).catch(options.report);
+  el<HTMLSelectElement>('fit').onchange=()=>{void options.call('set-fit',el<HTMLSelectElement>('fit').value).catch(options.report);};
+  el<HTMLSelectElement>('monitor').onchange=()=>{void options.call('display-select',el<HTMLSelectElement>('monitor').value).catch(options.report);};
   function previewState() {
     const label = t(previewPaused ? '播放预览' : '暂停预览');
     button('preview-toggle').innerHTML = icon(previewPaused ? 'play' : 'pause');
@@ -150,7 +163,7 @@ export function wallpaperView(root: HTMLElement, featured: boolean, options: Opt
       name.textContent = item.title;
       const note = document.createElement('small');
       note.textContent = t(
-        isActive(item, metrics) ? '当前壁纸' : item.ready ? '已保存到本机' : '预览尚未生成',
+        isActive(item, metrics) ? '当前壁纸' : item.ready ? '已保存到本机' : item.official || item.market ? '选择规格下载' : '预览尚未生成',
       );
       text.append(name, note);
       card.append(image, text);
@@ -193,7 +206,17 @@ export function wallpaperView(root: HTMLElement, featured: boolean, options: Opt
     button('desktop-toggle').disabled = !!metrics.loading;
     button('stop').disabled = !!metrics.stopped;
     showVolume(metrics.volume ?? 0);
-    button('apply').disabled = applying || !current()?.ready;
+    const item=current();
+    const active=!!item&&isActive(item,metrics)&&metrics.selectionId===playbackId();
+    el('apply-label').textContent=t(applying?'正在启动':active?'当前壁纸':'设为壁纸');
+    button('apply').disabled = applying || !item?.ready || active;
+    const preset=current()?.presets.find(p=>p.id===playbackId());
+    if(preset)el('quality-label').textContent=preset.presentation.variantLabel+(metrics.selectionId!==preset.id||metrics.stopped?' · '+t('待应用'):'');
+    for(const row of el('qualities').querySelectorAll<HTMLElement>('[data-quality-id]')){
+      const used=row.dataset.qualityId===metrics.selectionId&&!metrics.stopped&&!metrics.fault&&!metrics.loading;
+      row.classList.toggle('desktop-quality',used);
+      row.querySelector<HTMLElement>('.quality-active')!.hidden=!used;
+    }
   }
   function render() {
     const visible = choices();
@@ -226,40 +249,53 @@ export function wallpaperView(root: HTMLElement, featured: boolean, options: Opt
         )
           .toString()
           .padStart(2, '0')} · ${(item.video.bytes / 1024 ** 2).toFixed(1)} MB`
-      : item.description;
-    button('make-cover').hidden = item.ready;
+      : `${item.author ? item.author + ' · ' : ''}${item.description}`;
+    button('make-cover').hidden = item.ready || !item.video;
     button('share').disabled = !item.video || !item.ready;
     button('share').title = item.video ? t('分享') : t('精选主题暂不支持分享');
     button('previous').disabled = button('next').disabled = visible.length < 2;
-    el('quality').hidden = !preset;
-    if (preset) {
-      el('quality-label').textContent = preset.presentation.variantLabel;
+    el('quality').hidden = !preset && !item.official && !item.market;
+    if(item.market){
+      el('quality-label').textContent=`${item.market.info.width} × ${item.market.info.height}`;
+      const download=document.createElement('button');download.textContent=t(item.ready?'已安装':'下载壁纸');download.disabled=item.ready;
+      download.onclick=()=>{if(options.downloadMarket)void options.downloadMarket(item.market!.id).catch(options.report);};
+      el('qualities').replaceChildren(download);
+    }
+    if (preset || item.official) {
+      el('quality-label').textContent = preset?.presentation.variantLabel ?? t('分辨率与下载');
       el('qualities').replaceChildren();
-      for (const variant of preset.presentation.variants) {
+      for (const variant of item.official?.variants ?? preset!.presentation.variants) {
         const installed = item.presets.find((p) => p.presentation.variantLabel === variant.label);
         const row = document.createElement('div');
         row.className = 'quality-row';
+        if(installed)row.dataset.qualityId=installed.id;
         const choice = document.createElement('button');
         choice.className = 'quality-choice';
         choice.disabled = !installed;
-        choice.setAttribute('aria-pressed', String(installed?.id === playbackId()));
+        choice.setAttribute('aria-pressed', String(!!installed && installed.id === playbackId()));
         const label = document.createElement('strong');
         label.textContent = variant.label;
+        const check=document.createElement('span');check.className='quality-check';check.textContent='✓';check.setAttribute('aria-hidden','true');
+        label.prepend(check);
+        const activeBadge=document.createElement('span');activeBadge.className='quality-active';activeBadge.textContent=t('桌面使用中');activeBadge.hidden=true;
         const note = document.createElement('small');
         note.textContent = t(
-          installed ? (installed.id === playbackId() ? '当前选择 · 已安装' : '已安装') : variant.state,
+          installed ? (installed.id === playbackId() ? '当前选择 · 已安装' : '已安装') : ('bytes' in variant ? `${(variant.bytes/1024**2).toFixed(0)} MB` : variant.state),
         );
-        choice.append(label, note);
+        choice.append(label, note, activeBadge);
         choice.onclick = () => {
           stopPreview();
           selectedQuality = installed!.id;
           el<HTMLDetailsElement>('quality').open = false;
           render();
+          if(metrics.selectionId!==installed!.id||metrics.stopped)actionNotice(t('已选择画质，点击“设为壁纸”应用到当前显示器。'));
         };
         const download = document.createElement('button');
         download.textContent = t(installed ? '已安装' : '下载');
-        download.disabled = true;
-        download.title = t(installed ? '此规格已可离线使用' : '暂不可下载');
+        const available='availability' in variant && variant.availability==='ready' && variant.access==='free';
+        download.disabled = !!installed || !available || !options.download;
+        download.title = t(installed ? '此规格已可离线使用' : available ? '下载' : '暂不可下载');
+        download.onclick=()=>{if('id' in variant && options.download){download.disabled=true;void options.download(variant.id).catch(options.report).finally(()=>render());}};
         row.append(choice, download);
         el('qualities').append(row);
       }
@@ -338,6 +374,13 @@ export function wallpaperView(root: HTMLElement, featured: boolean, options: Opt
       for (const key of ['quality', 'desktop-menu']) el<HTMLDetailsElement>(key).open = false;
   });
   return {
+    actionNotice,
+    displays: (data:any) => {
+      const select=el<HTMLSelectElement>('monitor');
+      const options=data.monitors.map((m:any,i:number)=>new Option(`${i+1} · ${m.label} · ${m.width}×${m.height}${m.primary?' · '+t('主屏'):''}`,m.id));
+      select.replaceChildren(...options);select.value=data.target;
+      el<HTMLSelectElement>('fit').value=data.monitors.find((m:any)=>m.id===data.target)?.fit??'cover';
+    },
     setItems(next: Wallpaper[]) {
       items = next;
       render();

@@ -4,7 +4,7 @@ import { icon } from './icons';
 import { getLocale, setLocale, t, errorMessage } from './i18n';
 import { wallpaperView } from './wallpaper-view';
 import { mountAccount } from './account-ui';
-import { libraryWallpapers, themeWallpapers, media, type LocalVideo, type Preset } from './wallpapers';
+import { libraryWallpapers, themeWallpapers, media, type LocalVideo, type Preset, type OfficialTheme } from './wallpapers';
 type MarketItem = {
   id: string;
   title: string;
@@ -16,6 +16,7 @@ type MarketItem = {
   coverUrl: string;
   shareUrl: string;
   info: LocalVideo['info'];
+  kind?:string;themeId?:string;official?:boolean;featured?:boolean;variants?:{id:string;label:string}[];
 };
 const size = (n: number) =>
   n >= 1024 ** 3 ? `${(n / 1024 ** 3).toFixed(2)} GB` : `${(n / 1024 ** 2).toFixed(1)} MB`;
@@ -41,6 +42,8 @@ export async function mountPlatform(
     next: number | null = null,
     marketGeneration = 0,
     applyGeneration = 0;
+  let selectedMonitor='';
+  let featuredItems:MarketItem[]|null=null,canCurate=false;
   let noticeTimer: ReturnType<typeof setTimeout> | undefined;
   const notice = (text: string) => {
     clearTimeout(noticeTimer);
@@ -59,6 +62,8 @@ export async function mountPlatform(
     report,
     importVideo: () => el<HTMLButtonElement>('import-video').click(),
     browseMarket: () => setTab('market'),
+    download: (id: string) => work('正在下载主题',async()=>{await call('official-install',id);}),
+    downloadMarket:(id:string)=>work('正在下载',async()=>{const entry=await call('market-download',id);if(entry.coverVersion!==2)await cover(entry);}),
   };
   const views = [
     wallpaperView(el('scene-pane'), true, viewOptions),
@@ -67,7 +72,10 @@ export async function mountPlatform(
   function playback(m: any) {
     for (const view of views) view.playback(m);
   }
-  await listen<any>('trial-metrics', (e) => playback(e.payload));
+  function displays(data:any){selectedMonitor=data.target;for(const view of views)view.displays(data);const m=data.monitors.find((m:any)=>m.id===data.target);if(m)playback(m.state.playback);}
+  await listen<any>('trial-metrics', (e) => {if(e.payload.monitorId===selectedMonitor)playback(e.payload);});
+  await listen<any>('displays-changed',e=>displays(e.payload));
+  displays(await call('displays'));
   playback((await call('metrics')).playback);
   function setTab(name: string) {
     sessionStorage.setItem('sofamate-tab', name);
@@ -82,24 +90,32 @@ export async function mountPlatform(
     if (name === 'market') void refreshMarket();
   }
   async function refreshLibrary() {
-    const [videos, catalog] = await Promise.all([call('library-list'), call('catalog')]);
+    const [videos, catalog, official] = await Promise.all([call('library-list'), call('catalog'),call('official-catalog')]);
     entries = videos;
     presets = catalog.presets;
-    views[0].setItems(themeWallpapers(presets));
+    const themes=themeWallpapers(presets,official.themes as OfficialTheme[]);
+    const featured=featuredItems===null?themes:featuredItems.flatMap(item=>{
+      if(item.kind==='scene-pack')return themes.filter(t=>t.id==='theme:'+item.themeId);
+      const local=entries.find(e=>e.sha256===item.sha256&&e.ready);
+      return [{id:'market:'+item.id,title:item.title,description:item.description,author:item.author,cover:item.coverUrl,ready:!!local,playbackIds:local?['local:'+local.id]:[],presets:[],video:local,market:item}];
+    });
+    views[0].setItems(featured);
     views[1].setItems(libraryWallpapers(presets, entries));
   }
   async function apply(id: string) {
     const generation = ++applyGeneration;
+    const monitorId=selectedMonitor;
     views.forEach((v) => {
+      v.actionNotice('');
       v.stopPreview();
       v.setApplying(true);
     });
     try {
-      await call('select', id);
+      await call('select', {id,monitorId});
       const deadline = Date.now() + 16000;
       while (generation === applyGeneration && Date.now() < deadline) {
-        const current = (await call('metrics')).playback;
-        playback(current);
+        const current = (await call('metrics',{monitorId})).playback;
+        if(selectedMonitor===monitorId)playback(current);
         if (current.selectionId === id && current.fault) throw Error('播放未能启动，请重试。');
         if (
           current.selectionId === id &&
@@ -108,7 +124,7 @@ export async function mountPlatform(
           !current.loading &&
           current.frames > 0
         ) {
-          notice(t('已启动，请返回桌面观看'));
+          if(selectedMonitor===monitorId)for(const view of views)view.actionNotice(t('已启动，请返回桌面观看'));
           return;
         }
         await new Promise((resolve) => setTimeout(resolve, 200));
@@ -126,7 +142,7 @@ export async function mountPlatform(
     });
     await call('stop');
     playback((await call('metrics')).playback);
-    notice(t('已停止，桌面播放资源已释放'));
+    for(const view of views)view.actionNotice(t('已停止，桌面播放资源已释放'));
   }
   async function work(label: string, fn: () => Promise<void>) {
     if (busy) return;
@@ -169,6 +185,8 @@ export async function mountPlatform(
   async function share(entry: LocalVideo) {
     if (busy) return;
     if (!(await account.requireLogin())) return;
+    if(entry.coverVersion!==2){await work('正在更新九宫格',()=>cover(entry));entry=entries.find(e=>e.id===entry.id)??entry;}
+    if(entry.coverVersion!==2)return;
     shareId = entry.id;
     const form = el<HTMLFormElement>('share-form');
     (form.elements.namedItem('title') as HTMLInputElement).value = entry.title;
@@ -190,6 +208,7 @@ export async function mountPlatform(
       if (generation !== marketGeneration) return;
       marketItems = more ? [...marketItems, ...data.items] : data.items;
       owner = data.owner ?? '';
+      canCurate=!!data.canCurate;
       next = data.nextOffset;
       renderMarket();
       el('market-status').textContent = marketItems.length
@@ -216,7 +235,7 @@ export async function mountPlatform(
       title.textContent = item.title;
       const author = document.createElement('p');
       author.className = 'muted';
-      author.textContent = `${item.author} · ${item.info.width} × ${item.info.height} · ${size(item.bytes)}`;
+      author.textContent = `${item.author}${item.official?' · '+t('官方作品'):item.featured?' · '+t('官方精选'):''} · ${item.info.width} × ${item.info.height} · ${size(item.bytes)}`;
       const desc = document.createElement('p');
       desc.className = 'market-description';
       desc.textContent = item.description;
@@ -231,15 +250,24 @@ export async function mountPlatform(
           ? void apply('local:' + local.id).catch(report)
           : void work('正在下载', async () => {
               const entry = await call('market-download', item.id);
+              if(entry.coverVersion!==2)await cover(entry);
               await refreshLibrary();
               views[1].select('local:' + entry.id);
               setTab('library');
               notice(t('下载完成，已加入我的壁纸。'));
             });
+      if(item.kind==='scene-pack'){
+        const quality=document.createElement('select');quality.setAttribute('aria-label',t('分辨率与下载'));
+        quality.replaceChildren(...(item.variants??[]).map(v=>new Option(v.label,v.id)));
+        const refreshButton=()=>button.textContent=t(presets.some(p=>p.id===quality.value)?'已下载 · 使用':'下载壁纸');
+        quality.onchange=refreshButton;refreshButton();actions.append(quality);
+        button.onclick=()=>{const id=quality.value;if(presets.some(p=>p.id===id)){void apply(id).catch(report);}else{void work('正在下载主题',async()=>{await call('official-install',id);await refreshLibrary();setTab('library');views[1].select('theme:'+item.themeId);await refreshMarket();});}};
+      }
       const link = document.createElement('button');
       link.textContent = t('分享链接');
       link.onclick = () => showLink(item.shareUrl);
       actions.append(button, link);
+      if(canCurate){const feature=document.createElement('button');feature.textContent=t(item.featured?'移出精选':'加入精选');feature.onclick=()=>{void work('精选已更新',async()=>{await call('market-feature',{id:item.id,featured:!item.featured});await refreshFeatured();await refreshMarket();});};actions.append(feature);}
       if (item.owner === owner) {
         const withdraw = document.createElement('button');
         withdraw.textContent = t('撤回分享');
@@ -348,9 +376,15 @@ export async function mountPlatform(
   setTab(
     savedTab && ['scenes', 'library', 'market'].includes(savedTab)
       ? savedTab
-      : catalog.selected?.startsWith('local:') || !presets.length
+      : catalog.selected?.startsWith('local:')
         ? 'library'
         : 'scenes',
   );
   (window as any).screenmatePlatform = { refreshLibrary };
+  void call('official-refresh').then(refreshLibrary).catch(()=>{});
+  async function refreshFeatured(){let offset:number|null=0;const items:MarketItem[]=[];while(offset!==null){const data=await call('market-list',{featured:true,offset});items.push(...data.items);offset=data.nextOffset;if(items.length>=1000)break;}featuredItems=items;await refreshLibrary();}
+  void refreshFeatured().catch(()=>{});
+  // Upgrade old local covers once; preserve imported videos and official art.
+  const oldCovers=entries.filter(e=>e.ready&&e.coverVersion!==2);
+  if(oldCovers.length)void work('正在更新九宫格',async()=>{for(const entry of oldCovers)await cover(entry);});
 }

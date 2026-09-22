@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0",
+  "publisher": {
+    "id": "SofaMate_collection",
+    "name": "SofaMate_collection",
+    "official": true,
+    "type": "managed-collection"
+  },
+  "themes": [
+    {
+      "id": "living-room-night",
+      "label": "夜间客厅",
+      "description": "生活篇 · 放松、零食、闲聊，和一起待着的夜晚。",
+      "author": "SofaMate_collection",
+      "preview": {
+        "path": "previews/living-room-night.jpg",
+        "sha256": "8f975e0df9fcd817bc854af3a2d6bfd4c749b67534b4a7a91cbab7d50439d30d",
+        "bytes": 663873
+      },
+      "variants": [
+        {
+          "id": "living-room-night-720p24",
+          "label": "720P · 24FPS",
+          "packId": "living-room-night-720p24",
+          "version": "0.4.0",
+          "width": 1280,
+          "height": 720,
+          "fps": 24,
+          "availability": "ready",
+          "access": "free",
+          "bytes": 153687939,
+          "artifact": {
+            "path": "living-room-night-720p24/0.4.0/download.json",
+            "sha256": "03fba1f4a51b2fc3256c5e39eca0321eb438384a5688181e087eb3e25fa14e57",
+            "bytes": 114919
+          }
+        },
+        {
+          "id": "living-room-night-1080p24",
+          "label": "1080P · 24FPS",
+          "packId": "living-room-night-1080p24",
+          "version": "0.4.0",
+          "width": 1920,
+          "height": 1080,
+          "fps": 24,
+          "availability": "ready",
+          "access": "free",
+          "bytes": 553900558,
+          "artifact": {
+            "path": "living-room-night-1080p24/0.4.0/download.json",
+            "sha256": "75e4dd8b84af35ef7f239d4a66c5e8abe040439aa461a5323d11778237a73395",
+            "bytes": 115196
+          }
+        },
+        {
+          "id": "living-room-night-1080p60",
+          "label": "1080P · 60FPS",
+          "packId": "living-room-night-1080p60",
+          "version": "0.4.0",
+          "width": 1920,
+          "height": 1080,
+          "fps": 60,
+          "availability": "ready",
+          "access": "free",
+          "bytes": 557757128,
+          "artifact": {
+            "path": "living-room-night-1080p60/0.4.0/download.json",
+            "sha256": "27f0d1de2d93cd25e5eb64de18e116f5978bd5f629cf6738849530c6f9a99bc1",
+            "bytes": 115274
+          }
+        },
+        {
+          "id": "living-room-night-4k24",
+          "label": "4K · 24FPS",
+          "packId": "living-room-night-4k24",
+          "version": "0.4.0",
+          "width": 3840,
+          "height": 2160,
+          "fps": 24,
+          "availability": "local-only",
+          "access": "free",
+          "bytes": 2942908211,
+          "artifact": {
+            "path": "living-room-night-4k24/0.4.0/download.json",
+            "sha256": "91d42130d2c80f83f2a60de35db3e6b3d23afcd5505e74ff251d694a1069efbc",
+            "bytes": 114835
+          },
+          "downloadNote": "4K 暂不开放公网下载"
+        }
+      ],
+      "previewVideoPath": "/previews/night-scene.mp4"
+    }
+  ]
+}

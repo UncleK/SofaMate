@@ -1,1 +1,1 @@
-{ "identifier": "trial-windows", "windows": ["controls", "wallpaper"], "permissions": ["core:event:default"] }
+{ "identifier": "trial-windows", "windows": ["controls", "wallpaper-*"], "permissions": ["core:event:allow-listen", "core:event:allow-unlisten"] }

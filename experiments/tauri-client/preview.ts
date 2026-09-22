@@ -35,10 +35,10 @@ export async function makePreview(
     if (!Number.isFinite(video.duration) || video.duration <= 0 || !video.videoWidth || !video.videoHeight)
       throw Error('无法读取视频画面');
     const canvas = document.createElement('canvas');
-    canvas.width = 1200;
-    canvas.height = 675;
+    canvas.width = 1920;
+    canvas.height = 1080;
     const ctx = canvas.getContext('2d')!;
-    ctx.fillStyle = '#101511';
+    ctx.fillStyle = '#151918';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < 9; i++) {
       if (signal.aborted) throw Error('预览生成已取消');
@@ -47,10 +47,9 @@ export async function makePreview(
         video.currentTime = t;
       });
       if (video.readyState < 2) throw Error('视频未能解码到预览位置');
-      const cellW = 400,
-        cellH = 225,
-        gap = 3,
-        scale = Math.min((cellW - gap * 2) / video.videoWidth, (cellH - gap * 2) / video.videoHeight);
+      const cellW = 640,
+        cellH = 360,
+        scale = Math.min(cellW / video.videoWidth, cellH / video.videoHeight);
       const width = video.videoWidth * scale,
         height = video.videoHeight * scale;
       ctx.drawImage(
@@ -63,6 +62,10 @@ export async function makePreview(
       report(i + 1);
       await new Promise<void>((r) => setTimeout(r, 0));
     }
+    // Same layout as the official scene: no outside padding, 4px interior rules.
+    ctx.fillStyle='#151918';
+    for(const x of [640,1280])ctx.fillRect(x-2,0,4,1080);
+    for(const y of [360,720])ctx.fillRect(0,y-2,1920,4);
     const blob = await new Promise<Blob>((resolve, reject) =>
       canvas.toBlob((b) => (b ? resolve(b) : reject(Error('预览图生成失败'))), 'image/jpeg', 0.85),
     );

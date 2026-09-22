@@ -25,6 +25,8 @@ export interface Metrics {
     mediaTime: number;
     elapsedMs: number;
     result: 'decoding' | 'decoded' | 'failed';
+    method?: 'decoded-snapshot' | 'reload';
+    decodedMediaTime?: number;
   } | null;
 }
 function once(target: HTMLMediaElement, event: string, timeout = 10000) {
@@ -317,9 +319,9 @@ export class VideoPlayer {
       .catch((e) => {
         if (gen === this.generation) this.fail(String(e));
       });
-    const frame = (_now: number, meta: VideoFrameCallbackMetadata) => {
-      if (!isCurrent()) return;
-      const f = Math.round((meta.mediaTime * edge.fpsNumerator) / edge.fpsDenominator);
+    const present = (mediaTime: number) => {
+      if (!isCurrent() || this.endedFrame) return;
+      const f = Math.round((mediaTime * edge.fpsNumerator) / edge.fpsDenominator);
       if (this.retryFinalFrame && f !== edge.outFrameExclusive - 1) {
         this.callbackIds[slot] = v.requestVideoFrameCallback(frame);
         return;
@@ -371,6 +373,7 @@ export class VideoPlayer {
       this.callbackIds[slot] = v.requestVideoFrameCallback(frame);
       if (this.metrics.frames % 15 === 0) this.publish();
     };
+    const frame = (_now: number, meta: VideoFrameCallbackMetadata) => present(meta.mediaTime);
     this.callbackIds[slot] = v.requestVideoFrameCallback(frame);
     v.onended = () => {
       if (!isCurrent() || this.endedFrame || this.recoveryTimer) return;
@@ -385,6 +388,29 @@ export class VideoPlayer {
         result: 'decoding',
       };
       v.pause();
+      // rVFC is best-effort. At EOS the decoder may already hold the exact final
+      // frame even if its compositor callback was omitted. VideoFrame(video)
+      // retains that decoded frame's native PTS; never override the timestamp
+      // or substitute currentTime/duration as proof of the approved endpoint.
+      recoveryStarted=performance.now();
+      if(typeof VideoFrame!=='undefined'&&v.readyState>=2){
+        let decoded:VideoFrame|null=null;
+        try{
+          decoded=new VideoFrame(v);
+          const pts=decoded.timestamp/1e6;
+          if(Math.round(pts*edge.fpsNumerator/edge.fpsDenominator)===edge.outFrameExclusive-1){
+            this.metrics.lastRecovery!.method='decoded-snapshot';
+            this.metrics.lastRecovery!.decodedMediaTime=pts;
+            this.metrics.lastRecovery!.result='decoded';
+            this.metrics.lastRecovery!.elapsedMs=performance.now()-recoveryStarted;
+            v.cancelVideoFrameCallback(this.callbackIds[slot]);
+            present(pts);
+            return;
+          }
+        }catch{ /* An unavailable decoded surface falls back to explicit decode. */ }
+        finally{decoded?.close();}
+      }
+      this.metrics.lastRecovery!.method='reload';
       this.retryFinalFrame = () => {
         if (!isCurrent() || this.machine.paused) return;
         const attempt = ++recoveryAttempt;
@@ -399,6 +425,12 @@ export class VideoPlayer {
           if (!isCurrent() || this.machine.paused || attempt !== recoveryAttempt) return;
           this.callbackIds[slot] = v.requestVideoFrameCallback(frame);
           v.currentTime = ((edge.outFrameExclusive - 1 + 0.1) * edge.fpsDenominator) / edge.fpsNumerator;
+          // A paused, nearly covered video can finish seeking without submitting
+          // another compositor callback. Play this exact final frame; `frame`
+          // still verifies its decoded PTS and pauses it before committing.
+          void v.play().catch((e)=>{
+            if(isCurrent()&&!this.machine.paused&&attempt===recoveryAttempt)this.fail(String(e));
+          });
         };
         // Seeking within the cached final frame need not submit a new rVFC.
         // Reload even on the first recovery to require a new decode submission.
@@ -497,7 +529,10 @@ export class VideoPlayer {
   private applyBlend() {
     if (!this.blend) return;
     const incoming = this.slots[this.blend.slot], outgoing = this.slots[this.activeSlot];
-    incoming.style.opacity = String(this.blend.weight);
+    // Keep the outgoing surface composited until its final rVFC arrives.
+    // A fully opaque incoming layer can make WebView2 cull that last callback,
+    // even though the decoder reached EOS (especially with 4K overlays).
+    incoming.style.opacity = String(this.endedFrame ? this.blend.weight : Math.min(this.blend.weight, 0.99));
     incoming.volume = this.volume * this.blend.weight;
     outgoing.volume = this.volume * (1 - this.blend.weight);
   }

@@ -16,6 +16,7 @@ reports/
 output/
 deliverables/
 demo-store/
+official-store/
 素材/
 demo2.gif
 *.env
